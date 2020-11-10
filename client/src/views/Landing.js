@@ -7,6 +7,7 @@ import {
   Container,
   Card,
   Form,
+  Accordion,
 } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { LimitedText } from '../components/texts/LimitedText';
@@ -41,23 +42,22 @@ export const Landing = () => {
           backgroundSize: 'cover',
           height: '100vh',
           marginBottom: 0,
+          marginTop:-100,
           top: 0,
           backgroundImage:
             'url(' +
-            'https://scontent.ffcm1-2.fna.fbcdn.net/v/t31.0-8/462724_327980603927350_71047181_o.jpg?_nc_cat=108&ccb=2&_nc_sid=d2e176&_nc_ohc=rVRquBQ3R68AX-vdn11&_nc_ht=scontent.ffcm1-2.fna&oh=a3e8f569f9d59cb2e45566706174e12a&oe=5FC80212' +
+            'https://images.unsplash.com/photo-1563991655280-cb95c90ca2fb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80' +
             ')',
         }}
       >
-        {/* <div className="mt-5">
+         <div style={{marginTop:"60vh"}}>
           <h1>Hello, world!</h1>
           <h3>
             This is a simple hero unit, a simple jumbotron-style component for
             calling extra attention to featured content or information.
           </h3>
-          <p>
-            <Button variant="primary">Learn more</Button>
-          </p>
-        </div> */}
+          
+        </div> 
       </Jumbotron>
       <Container fluid>
         <Row className="pt-5 text-center">
@@ -75,26 +75,28 @@ export const Landing = () => {
           </Col>
         </Row>
         <h1 className="p-4" style={{ color: '#01408F' }}>
-          How We Operate
+          How We Operate  <hr/>
         </h1>
-        <Row className="p-2">
+       
+        <Accordion>
           {stepsData.map((data, indx) => {
             return (
-              <Container  style={{color:'#FF584A'}}>
-                <Row className="p-2 text-left text-uppercase">
-                  <Col lg="4" md="6" sm="6" key={indx}>
-                    <h1><b>{data.name}</b></h1>
-                  </Col>
-                  <Col lg="8" md="6" sm="6" key={indx}>
-                    <h3>{data.description}</h3>
-                  </Col>
-                </Row>
-              </Container>
+              <Card>
+                 <Accordion.Toggle as={Card.Header} eventKey={indx+1}>
+                <Card.Header className="text-capitalize text-grey">
+                 <b>{data.name}</b> 
+                  </Card.Header>
+                </Accordion.Toggle>
+                <Accordion.Collapse eventKey={indx+1}>
+                <Card.Body>{data.description}</Card.Body>
+                </Accordion.Collapse>
+              </Card>
             );
           })}
-        </Row>
+        </Accordion>
+        
         <h1 className="p-4" style={{ color: '#01408F' }}>
-          What We Do
+          What We Do  <hr/>
         </h1>
         <Row className="p-2">
           {serviceData.map((data, indx) => {
@@ -106,8 +108,8 @@ export const Landing = () => {
                       {data.name}
                     </Card.Title>
                     <Card.Text>
-                    <LimitedText text= {data.description} />
-                      </Card.Text>
+                      <LimitedText text={data.description} />
+                    </Card.Text>
                     <Link
                       to={{ pathname: '/page', model: data }}
                       className="btn btn-primary"

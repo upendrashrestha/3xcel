@@ -1,14 +1,17 @@
 
 .header{
     width:100%;
-    height: 10vh;
-    transition: all .15s linear;
+    min-height: 100px;
+    transition: all .10s linear;
+    margin:0 auto;
 }
 .scrolled{
+    width:100%;
+    transition: all .10s linear;
     position: fixed;
     top:0;
     left:0;
     background-color: #fff;
-    z-index: 1;
+    z-index: 999;
     box-shadow: 0 0 10px rgba(0,0,0,0.4);
 }

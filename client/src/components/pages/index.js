@@ -1,5 +1,5 @@
 import React, { useState,useEffect } from 'react';
-import { Col, Row, Button, Container, Form } from 'react-bootstrap';
+import { Col, Row, Button, Container, Form, Card } from 'react-bootstrap';
 import Layout from '../../shared/Layout';
 import PopUp from '../../shared/popup';
 import { InquiryForm } from '../forms/InquiryForm';
@@ -41,16 +41,21 @@ export const Page = (props) => {
       </PopUp>
 
       <Container fluid>
-        <Row className="p-5">
+        <Row className="p-5" style={{minHeight:"100vh"}}>
           <Col>
-            <h3>
+          <Card> 
+            <Card.Body>
+            <Card.Title>
               <b>{data.name}</b>
-            </h3>
+            </Card.Title>
             <p className="flow-text grey-text text-darken-1">
               {data.description}
             </p>
             <Button onClick={showPopUp}>Lets create your dream project</Button>
+            </Card.Body>
+            </Card>
           </Col>
+
         </Row>
       </Container>
     </Layout>
