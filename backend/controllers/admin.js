@@ -1,4 +1,4 @@
-const Service = require('../models/service.model');
+const Service = require('../models/services');
 
 exports.getIndex = async (req, res) => {
     const service = await Service.find((data) => data);
@@ -61,10 +61,8 @@ exports.postService = (req, res) => {
 };
 
 exports.postEditService = (req, res) => {
-    const serviceId = req.body.serviceId;
-    const { name, image, description } = req.body;
-
-    Service.findById(serviceId)
+    const {_id, name, image, description } = req.body.model;
+    Service.findById(_id)
         .then((service) => {
             service.name = name;
             service.image = image;
@@ -82,8 +80,7 @@ exports.postEditService = (req, res) => {
 };
 
 exports.postDelete = async (req, res) => {
-    const serviceId = req.body.serviceId;
-
+    const serviceId = req.body.model;
     const service = await Service.findByIdAndRemove(serviceId, (data) => data);
 
     try {

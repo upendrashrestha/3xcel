@@ -45,7 +45,7 @@ const AddService = () => {
       description="Add new service"
       header="Add New Service"
     >
-      <Col>
+      
         <Form noValidate validated={validated} onSubmit={handleSubmit}>
           <Form.Group controlId="formGroupTitle">
             <Form.Label>Title</Form.Label>
@@ -79,6 +79,8 @@ const AddService = () => {
             <Form.Label>Description</Form.Label>
             <Form.Control
               type="text"
+              as="textarea"
+              rows={3}
               name="description"
               required
               placeholder="Enter Service Description"
@@ -92,7 +94,7 @@ const AddService = () => {
             Add Service
           </Button>
         </Form>
-      </Col>
+      
     </DashboardLayout>
   );
 };

@@ -1,5 +1,4 @@
 import axios from "axios";
-import jwt_decode from "jwt-decode";
 const API_URL = "/users/";
 
 const register = (name, email, password, password2) => {
@@ -19,13 +18,12 @@ const login = (email, password) => {
     })
     .then((response) => {
       if (response.data?.token && response.data.token !== undefined) {
+        //console.log("RESPONSE",response);
         localStorage.setItem("jwtToken", JSON.stringify(response.data));
-        const decoded = jwt_decode(response.data.token);
-        // Set current user
-    console.log(decoded);
-      }
+        
+       }
 
-      return response.data;
+     // return response.data;
     });
 };
 

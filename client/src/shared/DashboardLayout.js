@@ -11,14 +11,15 @@ const DashboardLayout = ({ title, description, children, header }) => {
         <meta name="description" content={description || '3xcel Dashboard'} />
       </Helmet>
       <DashboardHeader />
-      <Container className="p-4">
-      <h3>{header}</h3>
+      <Container className="p-2">
+        <div className="pt-2 pb-4">
+          {header &&
+            <span className="border-bottom font-weight-bold d-block">{header}</span>
+          }
+        </div>
+        {children}
       </Container>
-    
-        <Container>
-          {children}
-        </Container>
-      
+
     </Fragment>
   );
 };

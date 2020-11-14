@@ -4,7 +4,7 @@ import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 
 import AuthService from "../../services/auth.service";
-import Layout from "../../shared/Layout";
+import DashboardLayout from "../../shared/DashboardLayout";
 
 const required = (value) => {
   if (!value) {
@@ -108,7 +108,7 @@ const Register = (props) => {
   };
 
   return (
-      <Layout title="Register Page" description="this is description">
+      <DashboardLayout title="Register Page" description="this is description">
    
         <Form onSubmit={handleRegister} ref={form}>
           {!successful && (
@@ -159,7 +159,7 @@ const Register = (props) => {
                   validations={[required, vpassword]}
                 />
               </div>
-              <div className="form-group col-3">
+              <div className="form-group col-4 mx-auto">
                 <button className="btn btn-primary btn-block">Sign Up</button>
               </div>
             </div>
@@ -178,7 +178,7 @@ const Register = (props) => {
           <CheckButton style={{ display: "none" }} ref={checkBtn} />
         </Form>
 
-    </Layout>
+    </DashboardLayout>
   );
 };
 

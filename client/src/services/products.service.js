@@ -1,7 +1,7 @@
 import axios from 'axios';
 import authHeader from './auth-header';
 
-const API_URL = '/admin/';
+const API_URL = '/product/';
 
 const getContent = async () => {
   return await axios.get(API_URL, { headers: authHeader() });
@@ -12,16 +12,12 @@ const getContentById = async (serviceId) => {
 };
 
 const editContent = async (model) => {
-  return await axios.post(API_URL +'edit-service', {model}, { headers: authHeader() });
-};
-
-const deleteContent = async (model) => {
-  return await axios.post(API_URL +'delete', {model}, { headers: authHeader() });
+  return await axios.post(API_URL, { headers: authHeader() });
 };
 
 const addContent = async (model) => {
   return await axios.post(
-    API_URL + 'add-service',
+    API_URL + 'add-product',
     { model },
     { headers: authHeader() }
   );
@@ -30,7 +26,5 @@ const addContent = async (model) => {
 export default {
   getContent,
   addContent,
-  getContentById,
-  editContent,
-  deleteContent
+  getContentById
 };

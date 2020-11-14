@@ -22,8 +22,10 @@ app.use(cors());
 // Routes
 const usersRoute = require("./routes/api/users");
 const adminRoute = require('./routes/api/admin');
+const productRoute = require('./routes/api/product');
 app.use("/api/users", usersRoute);
 app.use('/api/admin',adminRoute);
+app.use('/api/product', productRoute);
 
 app.use(express.urlencoded({ extended: false }));
 app.use('/static', express.static(path.join(`${__dirname}/public`)));

@@ -11,6 +11,8 @@ import AddService from '../components/services/AddService';
 import ListService from '../components/services/ListService';
 import ListUser from '../components/users/ListUser';
 import EditService from '../components/services/EditService';
+import AddProduct from '../components/products/AddProduct';
+import ListProduct from '../components/products/ListProduct';
 
 const Routes = () => {
   return (
@@ -19,14 +21,19 @@ const Routes = () => {
         <Route exact path="/" component={Landing} />
         <Route exact path="/page" component={Page} />
         <Route path="/login" component={Login} />
-        <Route path="/register" component={Register} />
+        
         <Route exact path="/contact" component={ContactUs} />
-
+        <PrivateRoute path="/add-user" component={Register} />
         <PrivateRoute path="/dashboard" component={Dashboard} />
-        {/* <PrivateRoute path="/add-service" component={AddService} /> */}
+
+        <PrivateRoute path="/add-service" component={AddService} /> 
         <PrivateRoute path="/list-services" component={ListService} />
-        <PrivateRoute path="/list-users" component={ListUser} />
         <PrivateRoute path="/edit-service" component={EditService} />
+
+        <PrivateRoute path="/list-users" component={ListUser} />
+
+        <PrivateRoute path="/add-product" component={AddProduct} /> 
+        <PrivateRoute path="/list-products" component={ListProduct} />
       </Switch>
     </Router>
   );

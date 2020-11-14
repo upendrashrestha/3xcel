@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const ServiceSchema = mongoose.Schema({
+const schema = mongoose.Schema({
     name: {
         type: String,
         required: true,
@@ -13,6 +13,10 @@ const ServiceSchema = mongoose.Schema({
         type: String,
         required: true,
     },
+    price :{
+        type:String, 
+        required:true,
+    }
 });
 
-module.exports = mongoose.model('service', ServiceSchema);
+module.exports = mongoose.model('product', schema);

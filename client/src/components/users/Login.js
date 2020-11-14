@@ -1,10 +1,13 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Form from 'react-validation/build/form';
 import Input from 'react-validation/build/input';
 import CheckButton from 'react-validation/build/button';
 
 import AuthService from '../../services/auth.service';
-import { Container, Row, Col, Card } from 'react-bootstrap';
+
+
+import { Col, Container } from 'react-bootstrap';
+import { isAuthenticated } from '../../utils';
 
 const required = (value) => {
   if (!value) {
@@ -17,6 +20,17 @@ const required = (value) => {
 };
 
 const Login = (props) => {
+
+  useEffect(() => {
+    const checkAuth = () => {
+      if (isAuthenticated()) {
+        props.history.push('/dashboard');
+        window.location.reload();
+      }
+    };
+    checkAuth();
+  });
+
   const form = useRef();
   const checkBtn = useRef();
 
@@ -46,7 +60,7 @@ const Login = (props) => {
     if (checkBtn.current.context._errors.length === 0) {
       AuthService.login(email, password).then(
         () => {
-          props.history.push('/profile');
+          props.history.push('/dashboard');
           window.location.reload();
         },
         (error) => {
@@ -68,62 +82,57 @@ const Login = (props) => {
 
   return (
     <Container>
-       <Row>
-          <Col/>
-          <Col sm="12" md="6">
-            <Card bg="dark" text="white" style={{marginTop: 50, marginBottom: 50}}>
-              <Card.Header>Admin Login</Card.Header>
-              <Card.Body>
+      <Col className="mx-auto" sm={12} md={6} lg={4}>
+      <div className="pt-2 pb-4">
+        <span className=" font-weight-bolder text-center d-block">Admin Login</span>
+        </div>
+         
               <Form onSubmit={handleLogin} ref={form}>
-        <div className="form-group">
-          <label htmlFor="email">Email</label>
-          <Input
-            type="text"
-            className="form-control"
-            name="email"
-            value={email}
-            onChange={onChangeEmail}
-            validations={[required]}
-          />
-        </div>
+                <div className="form-group">
+                  <label htmlFor="email">Email</label>
+                  <Input
+                    type="text"
+                    className="form-control"
+                    name="email"
+                    value={email}
+                    onChange={onChangeEmail}
+                    validations={[required]}
+                  />
+                </div>
 
-        <div className="form-group">
-          <label htmlFor="password">Password</label>
-          <Input
-            type="password"
-            className="form-control"
-            name="password"
-            value={password}
-            onChange={onChangePassword}
-            validations={[required]}
-          />
-        </div>
+                <div className="form-group">
+                  <label htmlFor="password">Password</label>
+                  <Input
+                    type="password"
+                    className="form-control"
+                    name="password"
+                    value={password}
+                    onChange={onChangePassword}
+                    validations={[required]}
+                  />
+                </div>
 
-        <div className="form-group">
-          <button className="btn btn-primary btn-block" disabled={loading}>
-            {loading && (
-              <span className="spinner-border spinner-border-sm"></span>
-            )
-            ||<span>Login</span>}
-          </button>
-        </div>
+                <div className="form-group">
+                  <button className="btn btn-primary btn-block" disabled={loading}>
+                    {loading && (
+                      <span className="spinner-border spinner-border-sm"></span>
+                    )
+                      || <span>Login</span>}
+                  </button>
+                </div>
 
-        {message && (
-          <div className="form-group">
-            <div className="alert alert-danger" role="alert">
-              {message}
-            </div>
-          </div>
-        )}
-        <CheckButton style={{ display: 'none' }} ref={checkBtn} />
-      </Form>
+                {message && (
+                  <div className="form-group">
+                    <div className="alert alert-danger" role="alert">
+                      {message}
+                    </div>
+                  </div>
+                )}
+                <CheckButton style={{ display: 'none' }} ref={checkBtn} />
+              </Form>
 
-              </Card.Body>
-            </Card>
-          </Col>
-          <Col/>
-        </Row>
-     
+              </Col>
+
     </Container>
   );
 };
