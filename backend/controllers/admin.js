@@ -56,8 +56,8 @@ exports.postService = (req, res) => {
     const service = new Service({ name: name, image: image, description: description });
     service.save();
     console.log('Service Added to the database');
-    res.status(200);
-  //  res.status(201).redirect('http://localhost:3000/');
+   // res.status(200);
+   res.status(201).redirect('/');
 };
 
 exports.postEditService = (req, res) => {

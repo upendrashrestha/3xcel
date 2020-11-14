@@ -26,9 +26,8 @@ const Routes = () => {
         <PrivateRoute path="/add-user" component={Register} />
         <PrivateRoute path="/dashboard" component={Dashboard} />
 
-        <PrivateRoute path="/add-service" component={AddService} /> 
+        <PrivateRoute path="/add-service" component={ListService} /> 
         <PrivateRoute path="/list-services" component={ListService} />
-        <PrivateRoute path="/edit-service" component={EditService} />
 
         <PrivateRoute path="/list-users" component={ListUser} />
 

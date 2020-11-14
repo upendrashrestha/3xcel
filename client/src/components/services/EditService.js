@@ -3,75 +3,37 @@ import { Form, Button, Container, Col,Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import ServicesService from '../../services/services.service';
 import DashboardLayout from '../../shared/DashboardLayout';
-import Toast from 'react-bootstrap/Toast';
 
-const EditService = (props) => {
+const EditService = props => {
 
-  const [service, setService] = useState(props.location.model);
+  const [service, setService] = useState(props.currentService);
   const [validated, setValidated] = useState(false);
-  const [message, setMessage] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [show, setShow] = useState(false);
+ 
+  useEffect(
+    () => {
+      setService(props.currentService)
+    },
+    [ props ]
+  )
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setService({ ...service, [name]: value });
   };
 
-
-
-  const handleSubmit = async (event) => {
-    setLoading(true);
-    setMessage(null);
+ const handleSubmit = async (event) => {
     event.preventDefault();
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.stopPropagation();
     }
     setValidated(true);
-
-    await ServicesService.editContent(service)
-      .then((result) => {
-        console.log("Service", service);
-        let successMsg = { status: "success", mode: "modified", text: "Successfully edited." };
-        setMessage(successMsg);
-        setShow(true);
-        setLoading(false);
-      })
-      .catch((err) => {
-        let unsuccessMsg = { status: "failure", mode: "modified", text: "Oops! Something went wrong." };
-        setMessage(unsuccessMsg);
-        setLoading(false);
-        setShow(true);
-      });
+    props.setEditing(true);
+    await props.updateService(service);
   };
 
   return (
-    <DashboardLayout
-      title="Add Service"
-      description="Add new service"
-      header="Add New Service"
-    >
-     
-          {message &&
-          
-           <Toast
-             style={{
-               position: 'absolute',
-               top: 20,
-               right: 10,
-               backgroundColor: message.status === 'success' && "#5cb85c" || "#111",
-               color:"#fff",
-               width: "300",
-               display:"block"
-             }}
-            
-           onClose={() => setShow(false)} show={show} delay={5000} autohide>
-              <Toast.Body> {message.text}
-              </Toast.Body>
-            </Toast>
-            }
-        
+   <>
       {service &&
         <Row>
           <Col sm={12}>
@@ -122,11 +84,8 @@ const EditService = (props) => {
                   Please provide a service description.
             </Form.Control.Feedback>
               </Form.Group>
-              <Button type="submit" className="my-1" disabled={loading}>
-                {loading && (
-                  <span className="spinner-border spinner-border-sm"></span>
-                )
-                  || <span>Edit</span>}
+              <Button type="submit" className="my-1">
+                Edit
               </Button>
 
             </Form>
@@ -134,7 +93,7 @@ const EditService = (props) => {
           </Row>
            || <p>Please select the service again. <Link to='./list-services'>Go back</Link></p>
       }
-    </DashboardLayout>
+      </>
   );
 };
 
