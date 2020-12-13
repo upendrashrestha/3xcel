@@ -26,22 +26,18 @@ const Routes = () => {
         <Route exact path="/" component={PegGameBoard} />
         <Route exact path="/page" component={Page} />
         <Route exact path="/pegboard" component={PegGameBoard} />
-        <Route path="/login" component={Login} />
-
-        <Route path="/faq" component={QuestionAnswer} />
-        
+        <Route exact path="/login" component={Login} />
+        <Route exact path="/faq" component={QuestionAnswer} />
+        <Route exact path="/3xcel" component={Landing} />
         <Route exact path="/contact" component={ContactUs} />
+
         <PrivateRoute path="/add-user" component={Register} />
         <PrivateRoute path="/dashboard" component={Dashboard} />
-
         <PrivateRoute path="/add-service" component={ListService} /> 
         <PrivateRoute path="/list-services" component={ListService} />
-
         <PrivateRoute path="/list-users" component={ListUser} />
-
         <PrivateRoute path="/add-product" component={AddProduct} /> 
         <PrivateRoute path="/list-products" component={ListProduct} />
-
         <PrivateRoute path="/add-question" component={AddQuestion} /> 
         <PrivateRoute path="/list-faq" component={ListQuestion} />
 
