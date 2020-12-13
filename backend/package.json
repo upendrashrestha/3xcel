@@ -6,8 +6,12 @@
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js",
-    "servers": "concurrently \"npm run dev\" \"cd ../client && npm run start\""
+    "servers": "concurrently \"npm run dev\" \"cd ../client && npm run start\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install npm && run build"
   },
+  "engines": {
+    "node": "10.16.0"
+},
   "keywords": [],
   "author": "Upendra Shrestha",
   "license": "ISC",

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Form, Button, Container, Col } from 'react-bootstrap';
 import ServicesService from '../../services/services.service';
-import DashboardLayout from '../../shared/DashboardLayout';
+
+import Editr from '../editor'
 
 const AddService = props => {
   const [validated, setValidated] = useState(false);
@@ -13,6 +14,8 @@ const AddService = props => {
   };
 
 
+
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const form = event.currentTarget;
@@ -21,7 +24,9 @@ const AddService = props => {
       event.stopPropagation();
     }
     setValidated(true);
-    await props.addService(service);
+    await props.addService(service).then(result=>{
+      setService(initialFormState);
+    });
 
   };
 
@@ -58,7 +63,7 @@ const AddService = props => {
 
       <Form.Group controlId="formGroupDescription">
         <Form.Label>Description</Form.Label>
-        <Form.Control
+        {/* <Form.Control
           type="text"
           as="textarea"
           rows={3}
@@ -66,7 +71,10 @@ const AddService = props => {
           required
           placeholder="Enter Service Description"
           onChange={handleChange}
-        />
+        /> */}
+       
+    <Editr name="description"  onChange={handleChange} />
+    
         <Form.Control.Feedback type="invalid">
           Please provide a service description.
             </Form.Control.Feedback>

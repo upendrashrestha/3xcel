@@ -85,7 +85,7 @@ const EditService = props => {
             </Form.Control.Feedback>
               </Form.Group>
               <Button type="submit" className="my-1">
-                Edit
+                Update
               </Button>
 
             </Form>

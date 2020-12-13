@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { Table, Container, Row, Col } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-import ServicesService from '../../services/services.service';
+import QuestionService from '../../services/questions.service';
 import DashboardLayout from '../../shared/DashboardLayout';
-import AddService from './AddService';
-import EditService from './EditService';
+import AddQuestion from './AddQuestion';
+import EditQuestion from './EditQuestion';
 import Toast from 'react-bootstrap/Toast';
 import Grid from '../grids/grid';
 import PopUp from '../popup';
@@ -13,16 +12,17 @@ import PopUp from '../popup';
 
 import parse from 'html-react-parser';
 
-const ListService = () => {
+const ListQuestion = () => {
   useEffect(() => {
     getAPI();
   }, []);
 
   const getAPI = async () => {
-    await ServicesService.getContent()
+    await QuestionService.getContent()
       .then((result) => {
         setLoading(false);
-        setService(result.data);
+      console.log(result.data);
+        setQuestion(result.data);
       })
       .catch((error) => {
         console.log(error);
@@ -33,16 +33,16 @@ const ListService = () => {
   const [showPopUp, setShowPopUp] = useState(false);
   const [editing, setEditing] = useState(false);
   
-  const initialFormState = { _id: null, name: '', description: '', image: '' }
+  const initialFormState = { _id: null, question: '', answer: '', category:'' }
   const deleteRow = async (e) => {
     if (window.confirm("Are you sure?"))
-      deleteService(e);
+      deleteQuestion(e);
   }
 
-  const deleteService = async (event) => {
+  const deleteQuestion = async (event) => {
     setMessage(null);
     event.preventDefault();
-    await ServicesService.deleteContent(event.target.id)
+    await QuestionService.deleteContent(event.target.id)
       .then((result) => {
         let successMsg = { status: "success", mode: "delete", text: "Successfully deleted." };
         setMessage(successMsg);
@@ -54,15 +54,15 @@ const ListService = () => {
       });
   }
 
-  const addService = async (service) => {
-    await ServicesService.addContent(service)
+  const addQuestion = async (question) => {
+    await QuestionService.addContent(question)
       .then((result) => {
         let successMsg = { status: "success", mode: "added", text: "Successfully added." };
         setMessage(successMsg);
         setShow(true);
         setShowPopUp(false);
         getAPI();
-        setCurrentService({ _id: '', name: '', description: '', image: '' });
+        setCurrentQuestion({ _id: '', question:'', answer:'', category:''});
       })
       .catch((err) => {
         let unsuccessMsg = { status: "failure", mode: "added", text: "Oops! Something went wrong." };
@@ -73,9 +73,9 @@ const ListService = () => {
   }
 
 
-  const updateService = async (service) => {
-    console.log("Service", service);
-    await ServicesService.editContent(service)
+  const updateQuestion = async (question) => {
+    console.log("Question", question);
+    await QuestionService.editContent(question)
       .then((result) => {
         console.log(result);
         let successMsg = { status: "success", mode: "modified", text: "Successfully edited." };
@@ -93,23 +93,23 @@ const ListService = () => {
       });
   }
 
-  const editRow = async(service) => {
+  const editRow = async(question) => {
     setEditing(true);
     setShowPopUp(true);
-    setCurrentService({ _id: service._id, name: service.name, description: service.description, image: service.image })
+    setCurrentQuestion({ _id: question._id, question: question.question, answer: question.answer, category: question.category })
   }
 
-  const [service, setService] = useState([]);
+  const [question, setQuestion] = useState([]);
   const [loading, setLoading] = useState(true);
   const [message, setMessage] = useState(null);
   const [deleting] = useState(false);
 
-  const [currentService, setCurrentService] = useState(initialFormState)
+  const [currentQuestion, setCurrentQuestion] = useState(initialFormState)
   
  const gridFields = [
- {title:'Image',name:'image',width:'5%'},
- {title:'Name',name:'name', width:'25%'},
- {title:'Description', name:'description', width:'50%'}];
+ {title:'Category',name:'category',width:'15'},
+ {title:'Question',name:'question', width:'25%'},
+ {title:'Answer', name:'answer', width:'40%'}];
 
 
 const handleClose = () => {
@@ -122,7 +122,7 @@ const showModal = () => {
 };
 
   return (
-    <DashboardLayout title="Services" header="Services">
+    <DashboardLayout title="Questions" header="Questions">
       {message &&
         <Toast
           style={{
@@ -151,23 +151,23 @@ const showModal = () => {
         }}
         className="p-1 button muted-button"
       >
-        Add New Service
+        Add New Question
 </Button>
              
                 <PopUp
-                title={editing && "Edit Service" || "Add New Service"}
+                title={editing && "Edit Question" || "Add New Question"}
                 description=""
                 show={showPopUp}
                 hide={handleClose}
                 size="lg">
                    {editing ===true  ? 
-                  <EditService
+                  <EditQuestion
                     editing={editing}
                     setEditing={setEditing}
-                    currentService={currentService}
-                    updateService={updateService}
+                    currentQuestion={currentQuestion}
+                    updateQuestion={updateQuestion}
                   /> :
-                  <AddService addService={addService} />
+                  <AddQuestion addQuestion={addQuestion} />
                   }
                   </PopUp>
                 
@@ -175,7 +175,7 @@ const showModal = () => {
             <Row className="pt-4">
             <Col sm={12} md={12} lg={12}>
               <Grid 
-              data={service}
+              data={question}
               size="sm" 
               striped={true}
               fields={gridFields}
@@ -193,4 +193,4 @@ const showModal = () => {
   );
 };
 
-export default ListService;
+export default ListQuestion;

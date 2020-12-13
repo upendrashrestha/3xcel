@@ -27,6 +27,7 @@ const DashboardHeader = () => {
           <NavDropdown.Item href="#action/3.2">Reset Password</NavDropdown.Item>
           <NavDropdown.Item href="#action/3.3">Deactivate User</NavDropdown.Item>
         </NavDropdown>
+        <Nav.Link href="/list-faq">FAQ</Nav.Link>
       </Navbar>
     </header>
   );

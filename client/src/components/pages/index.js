@@ -1,7 +1,7 @@
 import React, { useState,useEffect } from 'react';
 import { Col, Row, Button, Container, Form, Card } from 'react-bootstrap';
 import Layout from '../../shared/Layout';
-import PopUp from '../../shared/popup';
+import PopUp from '../popup';
 import { InquiryForm } from '../forms/InquiryForm';
 export const Page = (props) => {
   const [data,setData] = useState({});

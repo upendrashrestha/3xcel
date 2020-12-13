@@ -1,10 +1,9 @@
 import React, { useState, useRef } from 'react';
+import Editr from '../editor';
+import { Form, Button } from 'react-bootstrap';
 
-import { Form, Button, Container, Col } from 'react-bootstrap';
-import ProductsService from '../../services/products.service';
-import DashboardLayout from '../../shared/DashboardLayout';
 
-const AddService = () => {
+const AddProduct = props => {
 
     const form = useRef();
     const [model, setModel] = useState('');
@@ -12,33 +11,39 @@ const AddService = () => {
     const [message, setMessage] = useState('');
 
     const handleChange = (e) => {
+        console.log(e);
         const { name, value } = e.target;
         setModel({ ...model, [name]: value });
+        console.log(model);
     };
 
     const handleSubmit = async (event) => {
         setLoading(true);
-     
-        await ProductsService.addContent(model)
-            .then((result) => {
-                console.log(result);
-                setLoading(false);
-            })
-            .catch((err) => {
-                setMessage(err);
-                setLoading(false);
-            });
-
+        event.preventDefault();
+        const form = event.currentTarget;
+        if (form.checkValidity() === false) {
+         
+          event.stopPropagation();
+        }
+        await props.handleSave(model).then(result=>{
+          setModel(null);
+          setLoading(false);
+        }).catch((err)=>{
+            setLoading(false);
+        });
     };
 
-    return (
-        <DashboardLayout
-            title="Add Product"
-            description="Add new product"
-            header=" New Product"
-        >
-         
-                <Form noValidate onSubmit={handleSubmit}>
+    const fields =[
+        {name:'name', isRequired:true, type:'text', label:'Name'},
+        {name:'price', isRequired:true, type:'currency', label:'Price'},
+        {name:'image', isRequired:true, type:'text', label:'Image URL'},
+        {name:'description', isRequired:true, type:'editor', label:'Description'}
+    ]
+
+    
+
+    return ( 
+     <Form noValidate onSubmit={handleSubmit}>
                     <Form.Group controlId="formGroupTitle">
                         <Form.Label>Name</Form.Label>
                         <Form.Control
@@ -83,7 +88,7 @@ const AddService = () => {
 
                     <Form.Group controlId="formGroupDescription">
                         <Form.Label>Description</Form.Label>
-                        <Form.Control
+                        {/* <Form.Control
                             type="text"
                             name="description"
                             required
@@ -91,7 +96,8 @@ const AddService = () => {
                             as="textarea"
                             rows={3}
                             onChange={handleChange}
-                        />
+                        />  */}
+                        <Editr onChange={handleChange} name="description" />
                         <Form.Control.Feedback type="invalid">
                             Please provide a description.
             </Form.Control.Feedback>
@@ -99,9 +105,9 @@ const AddService = () => {
                     <Button type="submit" className="my-1">
                         Save
           </Button>
+          <p>{model.description}</p>
                 </Form>
-        </DashboardLayout>
     );
 };
 
-export default AddService;
+export default AddProduct;
