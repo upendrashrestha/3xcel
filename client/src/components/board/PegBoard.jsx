@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Peg } from './Peg';
 import PopUp from '../popup';
 
+
+
 export const PegBoard = (props) => {
     const [datas, setData] = useState(props.data);
     const [pegCount, setPegCount] = useState(15);
@@ -49,51 +51,51 @@ export const PegBoard = (props) => {
                         </ul>
                     </div>
 
-                    <div className="footer">                      
+                    <div className="footer">
                         <span className="link" onClick={() => howToPlay()}>How to play?
                         </span>
-                        
+
                     </div>
                     <span className="muted-text">Version 1.0 | www.upsth.com | www.urbi.xyz</span>
-                 
 
-<PopUp
-                title="PEG JUMP SOLITAIRE"
-                description="The goal is to remove all pegs but one by jumping pegs from one side of an occupied peg hole to available space, removing the peg which was jumped over."
-                show={showPopup}
-                hide={()=>closePopup()}
-                size="lg">
-                  
-                 
 
-<p className="text-left">                       
-<b>**</b> "T" is a valid peg to move. "O" is available space to move the peg in.
+                    <PopUp
+                        title="PEG JUMP SOLITAIRE"
+                        description="The goal is to remove all pegs but one by jumping pegs from one side of an occupied peg hole to available space, removing the peg which was jumped over."
+                        show={showPopup}
+                        hide={() => closePopup()}
+                        size="lg">
+
+
+
+                        <p className="text-left">
+                            <b>**</b> "T" is a valid peg to move. "O" is available space to move the peg in.
 </p>
-<br/>
-<h4>How to play ?</h4> 
-<ol>
-<li> Start New Game! </li>
-<li> Start the game by taking out any peg.</li>
-<li> Select the peg that can jump one peg over to the available space.  </li>
-<li> Play until you are out of moves.</li>
-</ol>
-<strong>Enjoy ! </strong><br/>
+                        <br />
+                        <h4>How to play ?</h4>
+                        <ol>
+                            <li> Start New Game! </li>
+                            <li> Start the game by taking out any peg.</li>
+                            <li> Select the peg that can jump one peg over to the available space.  </li>
+                            <li> Play until you are out of moves.</li>
+                        </ol>
+                        <strong>Enjoy ! </strong><br />
 
-<span className="muted-text">Version 1.0</span>
-                       
+                        <span className="muted-text">Version 1.0</span>
+
                     </PopUp>
-}
+
                 </div>
-                
+
             }
         </>
     );
 
-    function howToPlay(){       
+    function howToPlay() {
         setShowPopup(true);
     }
 
-    function closePopup(){        
+    function closePopup() {
         setShowPopup(false);
     }
 
@@ -174,9 +176,9 @@ export const PegBoard = (props) => {
     }
 
     function handleSelect(id) {
-        
+
         let selectedNode = getNode(id);
-        
+
         if (datas.nodes.findIndex(x => x.value === 0) === -1) {
             selectedNode.value = 0;
             selectedNode.displayValue = "O";
@@ -246,8 +248,8 @@ export const PegBoard = (props) => {
                 }
             }
             let destinationNodes = datas.nodes.find(x => x.flag === 'D');
-            if(!destinationNodes){                
-                selectedNode.stylename="bttnInvalid";
+            if (!destinationNodes) {
+                selectedNode.stylename = "bttnInvalid";
                 refreshDatas();
             }
 
