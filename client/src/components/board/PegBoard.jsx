@@ -80,8 +80,8 @@ export const PegBoard = (props) => {
                             <li> Play until you are out of moves.</li>
                         </ol>
                         <strong>Enjoy ! </strong><br />
-
-                        <span className="muted-text">Version 1.0</span>
+                        <a href="/faq"> FAQ </a>
+                        <span className="muted-text">Version 1.1</span>
 
                     </PopUp>
 

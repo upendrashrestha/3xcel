@@ -7,10 +7,8 @@ import Login from '../components/users/Login';
 import Register from '../components/users/Register';
 import PrivateRoute from '../private-routes/PrivateRoute';
 import { Dashboard } from '../views/Dashboard';
-import AddService from '../components/services/AddService';
 import ListService from '../components/services/ListService';
 import ListUser from '../components/users/ListUser';
-import EditService from '../components/services/EditService';
 import AddProduct from '../components/products/AddProduct';
 import ListProduct from '../components/products/ListProduct';
 import AddQuestion from '../components/faq/AddQuestion';
@@ -24,12 +22,12 @@ const Routes = () => {
     <Router>
       <Switch>
         <Route exact path="/" component={PegGameBoard} />
-        <Route exact path="/page" component={Page} />
-        <Route exact path="/pegboard" component={PegGameBoard} />
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/faq" component={QuestionAnswer} />
-        <Route exact path="/3xcel" component={Landing} />
-        <Route exact path="/contact" component={ContactUs} />
+        <Route path="/page" component={Page} />
+        <Route path="/pegboard" component={PegGameBoard} />
+        <Route path="/login" component={Login} />
+        <Route path="/faq" component={QuestionAnswer} />
+        <Route path="/3xcel" component={Landing} />
+        <Route path="/contact" component={ContactUs} />
 
         <PrivateRoute path="/add-user" component={Register} />
         <PrivateRoute path="/dashboard" component={Dashboard} />
