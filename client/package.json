@@ -13,7 +13,6 @@
     "classnames": "^2.2.6",
     "draft-js": "^0.11.7",
     "html-react-parser": "^0.14.3",
-    "http-proxy-middleware": "^1.0.6",
     "is-empty": "^1.2.0",
     "jwt-decode": "^3.0.0",
     "react": "^17.0.1",

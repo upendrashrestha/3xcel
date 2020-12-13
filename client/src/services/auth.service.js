@@ -1,5 +1,7 @@
 import axios from "axios";
-const API_URL = "/api/users/";
+import { baseUrl } from '../configs/config-urls';
+
+const API_URL = baseUrl + "/api/users/";
 
 const register = (name, email, password, password2) => {
   return axios.post(API_URL + "register", {
@@ -12,7 +14,7 @@ const register = (name, email, password, password2) => {
 
 const login = (email, password) => {
   return axios
-    .post(API_URL+"login", {
+    .post(API_URL + "login", {
       email,
       password,
     })
@@ -20,10 +22,10 @@ const login = (email, password) => {
       if (response.data?.token && response.data.token !== undefined) {
         //console.log("RESPONSE",response);
         localStorage.setItem("jwtToken", JSON.stringify(response.data));
-        
-       }
 
-     // return response.data;
+      }
+
+      // return response.data;
     });
 };
 
