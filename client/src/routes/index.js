@@ -13,20 +13,19 @@ import ListUser from '../components/users/ListUser';
 import EditService from '../components/services/EditService';
 import AddProduct from '../components/products/AddProduct';
 import ListProduct from '../components/products/ListProduct';
-
 import AddQuestion from '../components/faq/AddQuestion';
-
 import ListQuestion from '../components/faq/ListQuestion';
-
-
 import { QuestionAnswer } from '../views/QuestionAnswer';
+
+import { PegGameBoard } from '../components/board';
 
 const Routes = () => {
   return (
     <Router>
       <Switch>
-        <Route exact path="/" component={Landing} />
+        <Route exact path="/" component={PegGameBoard} />
         <Route exact path="/page" component={Page} />
+        <Route exact path="/pegboard" component={PegGameBoard} />
         <Route path="/login" component={Login} />
 
         <Route path="/faq" component={QuestionAnswer} />

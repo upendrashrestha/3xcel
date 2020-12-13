@@ -7,7 +7,7 @@ const Footer = () => {
       style={{ height: 'auto', backgroundColor: '#14284B', color: '#A7AEBB'}}
     >
       <Container className="botom-0">
-      <p>Hello</p>
+      <p>Footer</p>
       </Container>
     </footer>
   );

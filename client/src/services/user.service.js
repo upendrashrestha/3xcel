@@ -1,7 +1,8 @@
 import axios from "axios";
 import authHeader from "./auth-header";
+import { baseUrl } from '../configs/config-urls';
 
-const API_URL = "/api/users/";
+const API_URL = baseUrl+"/api/users/";
 
 const getAllUsers = () => {
   return axios.get(API_URL);
