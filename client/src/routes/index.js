@@ -14,9 +14,9 @@ import EditService from '../components/services/EditService';
 import AddProduct from '../components/products/AddProduct';
 import ListProduct from '../components/products/ListProduct';
 
-import AddQuestion from '../components/questions/AddQuestion';
+import AddQuestion from '../components/faq/AddQuestion';
 
-import ListQuestion from '../components/questions/ListQuestion';
+import ListQuestion from '../components/faq/ListQuestion';
 
 
 import { QuestionAnswer } from '../views/QuestionAnswer';
