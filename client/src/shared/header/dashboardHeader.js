@@ -1,5 +1,7 @@
 import React from "react";
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
+import AuthService from '../../services/auth.service';
+import { Redirect } from 'react-router-dom';
 const DashboardHeader = () => {
 
   return (
@@ -13,21 +15,17 @@ const DashboardHeader = () => {
       </Navbar>
       <Navbar bg="light" variant="dark" expand="lg">
         <Nav.Link href="/dashboard">Home</Nav.Link>
-        <NavDropdown title="Services" id="basic-nav-dropdown">
-          <NavDropdown.Item href="/list-services">List all Services</NavDropdown.Item>
-          <NavDropdown.Item href="/add-service">Add Service</NavDropdown.Item>
-        </NavDropdown>
-        <NavDropdown title="Products" id="basic-nav-dropdown">
-          <NavDropdown.Item href="/list-products">List all Products</NavDropdown.Item>
-          <NavDropdown.Item href="/add-product">Add Product</NavDropdown.Item>
-        </NavDropdown>
+       
+        
+        <Nav.Link href="/products">Products</Nav.Link>
+        <Nav.Link href="/services">Services</Nav.Link>
+       
         <NavDropdown title="User Settings" id="basic-nav-dropdown">
           <NavDropdown.Item href="/list-users">List Users</NavDropdown.Item>
           <NavDropdown.Item href="/add-user">Add User</NavDropdown.Item>
-          <NavDropdown.Item href="#action/3.2">Reset Password</NavDropdown.Item>
-          <NavDropdown.Item href="#action/3.3">Deactivate User</NavDropdown.Item>
         </NavDropdown>
-        <Nav.Link href="/list-faq">FAQ</Nav.Link>
+        <Nav.Link href="/faqs">FAQ</Nav.Link>
+        <Nav.Link onClick={()=>{AuthService.logout()}} href="/login">Log out</Nav.Link>
       </Navbar>
     </header>
   );

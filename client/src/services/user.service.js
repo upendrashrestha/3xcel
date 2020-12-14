@@ -8,21 +8,11 @@ const getAllUsers = () => {
   return axios.get(API_URL);
 };
 
-const getUserBoard = () => {
-  return axios.get(API_URL + "user", { headers: authHeader() });
-};
-
-const getModeratorBoard = () => {
-  return axios.get(API_URL + "mod", { headers: authHeader() });
-};
-
-const getAdminBoard = () => {
-  return axios.get(API_URL + "admin", { headers: authHeader() });
+const deleteUser = async (model) => {
+  return await axios.post(API_URL +'delete', {model}, { headers: authHeader() });
 };
 
 export default {
   getAllUsers,
-  getUserBoard,
-  getModeratorBoard,
-  getAdminBoard,
+  deleteUser
 };

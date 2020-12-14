@@ -1,1 +1,1 @@
-export const baseUrl = process.env.NODE_ENV === 'development' ? 'https://localhost:8078' : 'https://xcel-app.herokuapp.com';
+export const baseUrl = process.env.NODE_ENV === 'development' ? 'http://localhost:8078' : 'https://xcel-app.herokuapp.com';

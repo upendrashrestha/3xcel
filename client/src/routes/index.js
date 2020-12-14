@@ -9,7 +9,6 @@ import PrivateRoute from '../private-routes/PrivateRoute';
 import { Dashboard } from '../views/Dashboard';
 import ListService from '../components/services/ListService';
 import ListUser from '../components/users/ListUser';
-import AddProduct from '../components/products/AddProduct';
 import ListProduct from '../components/products/ListProduct';
 import AddQuestion from '../components/faq/AddQuestion';
 import ListQuestion from '../components/faq/ListQuestion';
@@ -31,13 +30,10 @@ const Routes = () => {
 
         <PrivateRoute path="/add-user" component={Register} />
         <PrivateRoute path="/dashboard" component={Dashboard} />
-        <PrivateRoute path="/add-service" component={ListService} /> 
-        <PrivateRoute path="/list-services" component={ListService} />
-        <PrivateRoute path="/list-users" component={ListUser} />
-        <PrivateRoute path="/add-product" component={AddProduct} /> 
-        <PrivateRoute path="/list-products" component={ListProduct} />
-        <PrivateRoute path="/add-question" component={AddQuestion} /> 
-        <PrivateRoute path="/list-faq" component={ListQuestion} />
+        <PrivateRoute path="/services" component={ListService} />
+        <PrivateRoute path="/list-users" component={ListUser} /> 
+        <PrivateRoute path="/products" component={ListProduct} />
+        <PrivateRoute path="/faqs" component={ListQuestion} />
 
       </Switch>
     </Router>
