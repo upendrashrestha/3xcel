@@ -49,7 +49,7 @@ const [currentData, setCurrentData] = useState(null);
   return (
     <Layout title="Landing Page" description="this is description">
       <PopUp
-        title={currentData.name}
+        title={currentData && currentData.name}
         description=""
         show={show}
         hide={handleClose}
