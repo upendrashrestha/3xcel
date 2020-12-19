@@ -1,0 +1,12 @@
+
+.jumbotron-main{
+    background-size: 'cover';
+    height: 100vh;
+    margin-bottom: 0;
+    margin-top:-70;
+  }
+
+  .jumbotron-content{
+      text-align: center;
+      padding-top: 20vh;
+  }

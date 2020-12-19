@@ -7,7 +7,7 @@ import { Container } from 'react-bootstrap';
 
 const Layout = ({ title, description, children }) => {
   return (
-    <Fragment>
+    <Fragment >
       <Helmet>
         <title>{title ? title+"-3xcel" : "3xcel"}</title>
         <meta name="description" content={description || "Test"} />
@@ -15,8 +15,8 @@ const Layout = ({ title, description, children }) => {
       <Header />
       <Container
         fluid
-        className="m-0 p-0 shadow mb-5"
-        style={{ backgroundColor: '#fff' }}
+        className="m-0 p-0 mb-5"
+    style={{ backgroundColor: '#fff' }}
       >
      {children}
      </Container>

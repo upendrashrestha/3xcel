@@ -1,7 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Landing } from '../views/Landing';
-import { Page } from '../components/pages';
 import { ContactUs } from '../views/ContactUs';
 import Login from '../components/users/Login';
 import Register from '../components/users/Register';
@@ -21,7 +20,6 @@ const Routes = () => {
     <Router>
       <Switch>
         <Route exact path="/" component={PegGameBoard} />
-        <Route path="/page" component={Page} />
         <Route path="/pegboard" component={PegGameBoard} />
         <Route path="/login" component={Login} />
         <Route path="/faq" component={QuestionAnswer} />

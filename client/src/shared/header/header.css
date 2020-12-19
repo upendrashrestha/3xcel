@@ -1,13 +1,23 @@
 
 .header{
     width:100%;
-    min-height: 100px;
-    transition: all .10s linear;
-    margin:0 auto;
+    min-height: 70px;
+    display:flex;
+    align-items: center;
+    background-color: #fff;
 }
+
+.header-content{
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    justify-items: center;
+    align-items:  space-between;
+}
+
 .scrolled{
     width:100%;
-    transition: all .10s linear;
+    transition: all .8s linear;
     position: fixed;
     top:0;
     left:0;

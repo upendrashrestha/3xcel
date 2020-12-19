@@ -14,17 +14,15 @@ const Header = () => {
     window.addEventListener('scroll', handleScroll);
   });
 
-  let navbarClasses = [''];
+  let navbarClasses = ['header'];
   if (scrolled) {
     navbarClasses.push('scrolled');
   }
   
   return (
     <header className={navbarClasses.join(' ')}>
-     
-      <Navbar bg="transparent" className='header'>
+      <Navbar className="header-content">
         <Navbar.Brand href="/">3XCEL</Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ml-auto">
             <Button href="/contact" variant="outline-info" className="rounded-pill">
@@ -34,7 +32,6 @@ const Header = () => {
           </Nav>
         </Navbar.Collapse>
       </Navbar>
-
     </header>
   );
 };
