@@ -2,15 +2,10 @@ import React, { useEffect, useState } from 'react';
 import {
   Col,
   Row,
-  Jumbotron,
-  Button,
   Container,
   Card,
-  Form,
-  Accordion,
 } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-import { LimitedText } from '../components/texts/LimitedText';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import DataService from '../services/datas.service';
 import Layout from '../shared/Layout';
@@ -36,7 +31,7 @@ export const Landing = () => {
   const [serviceData, setServiceData] = useState([]);
   const [stepsData, setStepsData] = useState([]);
   const [show, setShow] = useState(false);
-const [currentData, setCurrentData] = useState(null);
+  const [currentData, setCurrentData] = useState(null);
   const handleClose = () => {
     setShow(false);
   };
@@ -55,7 +50,7 @@ const [currentData, setCurrentData] = useState(null);
         hide={handleClose}
         size="lg"
       >
-        <Page model={currentData}/>
+        <Page model={currentData} />
       </PopUp>
       <Container >
         <div
@@ -72,10 +67,10 @@ const [currentData, setCurrentData] = useState(null);
         <Row className="mb-4">
           {stepsData.map((data, indx) => {
             return (<Col sm={12} md={4} lg={4} className="text-center">
-              <span className="p-2 text-capitalize" style={{ color: '#FF867E' }}>
-                <b>{`${indx + 1}. ${data.name}`}</b>
+              <span className="p-2 text-capitalize">
+                <h1 style={{ color: '#FF867E' }}><b className="text-muted">{indx + 1}. </b>{data.name} </h1>
               </span>
-              <p>{data.description}</p>
+              <p className="text-justify">{data.description}</p>
             </Col>)
           })}
         </Row>
@@ -100,23 +95,36 @@ const [currentData, setCurrentData] = useState(null);
         </Accordion> */}
 
 
-        <h4 className="p-2" style={{ color: '#01408F' }}>
+
+
+        <h4 style={{ color: '#01408F' }}>
           We XCEL <hr />
         </h4>
-        <Row className="pb-5 text-center">
-          {serviceData.map((data, indx) => {
-            return (
-              <Col lg={4} md={4} sm={12} key={indx}
-                className="p-2" >
-                <a className="p-2" onClick={()=>{setCurrentData(data); showPopUp();}}>
-                  {data.name}
-                </a>
-              </Col>
-            );
-          })}
-        </Row>
 
+
+        <Container>
+          <Row>
+            {serviceData.map((data, indx) => {
+              return (
+                <Col className="p-2" sm={12} lg={4} md={6}>
+                  <a className="customHover" onClick={() => { setCurrentData(data); showPopUp(); }}>
+                    <Card className="p-2 border-0 text-center" bg="">
+                     <h6>
+                      <FontAwesomeIcon  icon={data.icon} /> {data.name}
+                      </h6>
+                    </Card>
+                  </a>
+
+                </Col>
+              );
+            })}
+
+          </Row>
+        </Container>
       </Container>
+
+
+
     </Layout>
   );
 };

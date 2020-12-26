@@ -22,7 +22,7 @@ const Header = () => {
   return (
     <header className={navbarClasses.join(' ')}>
       <Navbar className="header-content">
-        <Navbar.Brand href="/">3XCEL</Navbar.Brand>
+        <Navbar.Brand href="/3xcel">3XCEL</Navbar.Brand>
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ml-auto">
             <Button href="/contact" variant="outline-info" className="rounded-pill">

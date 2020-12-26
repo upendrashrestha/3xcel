@@ -10,3 +10,14 @@
       text-align: center;
       padding-top: 20vh;
   }
+
+  .customHover{
+    text-decoration: none;
+    color:#111;
+    cursor: pointer;
+  }
+  
+  .customHover:hover{
+    text-decoration: none;
+    color:#666;
+  }

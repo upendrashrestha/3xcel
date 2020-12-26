@@ -16,7 +16,7 @@ const Layout = ({ title, description, children }) => {
       <Container
         fluid
         className="m-0 p-0 mb-5"
-    style={{ backgroundColor: '#fff' }}
+        style={{ backgroundColor: '#fff' }}
       >
      {children}
      </Container>
