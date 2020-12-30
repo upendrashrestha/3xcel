@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Navbar, Nav, NavDropdown, Button, Container } from 'react-bootstrap';
+import { Navbar, Nav,  Button } from 'react-bootstrap';
 import './header.css';
 const Header = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -22,7 +22,10 @@ const Header = () => {
   return (
     <header className={navbarClasses.join(' ')}>
       <Navbar className="header-content">
-        <Navbar.Brand href="/3xcel">3XCEL</Navbar.Brand>
+        <Navbar.Brand href="/3xcel"> <img 
+        height="35px"
+        src={window.location.origin + "/3xcel-logo.png"} 
+        alt="3xcel-logo" /></Navbar.Brand>
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ml-auto">
             <Button href="/contact" variant="outline-info" className="rounded-pill">

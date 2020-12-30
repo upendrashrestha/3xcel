@@ -43,7 +43,7 @@ const Page = (props) => {
             <p className="flow-text grey-text text-darken-1">
               {data.description}
             </p>
-            <Button onClick={showPopUp}>Lets create your dream project</Button>
+            <Button onClick={showPopUp}>LET'S GET STARTED!</Button>
            
         
     </>

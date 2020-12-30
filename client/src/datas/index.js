@@ -18,26 +18,26 @@ const SiteData = [
         name: 'Web Development',
         image: '',
         icon: faCode,
-        description: '',
+        description: 'Your website is your most important marketing tool, and our team is with you every step of the way to ensure we develop a custom website that you and your audience will love.',
       },
       {
         name: 'Magento Support',
         image: '',
         icon: faMagento,
         description:
-          'Your Magento store requires ongoing maintenance to protect it from security vulnerabilities and to constantly improve the user experience and site performance to stay one step ahead of your competitors. Technology and eCommerce are constantly evolving so keeping your site secure, innovative and performing at its peak is critical to your online success.',
+          'Your Magento store requires ongoing maintenance to protect it from security vulnerabilities and to constantly improve the user experience and site performance to stay one step ahead of your competitors.',
       },
       {
         name: 'Graphic Design',
         image: '',
         icon: faPalette,
-        description: 'Grapho designo descriptiono',
+        description: 'Your Magento store requires ongoing maintenance to protect it from security vulnerabilities and to constantly improve the user experience and site performance to stay one step ahead of your competitors.',
       },
       {
         name: 'WordPress',
         image: '',
         icon: faWordpress,
-        description: '',
+        description: 'Your Magento store requires ongoing maintenance to protect it from security vulnerabilities and to constantly improve the user experience and site performance to stay one step ahead of your competitors.',
       },
       {
         name: 'Shopify',

@@ -12,6 +12,7 @@ import Layout from '../shared/Layout';
 import PopUp from '../components/popup';
 import Page from '../components/pages';
 import './style.css';
+import { InquiryForm } from '../components/forms/InquiryForm';
 
 export const Landing = () => {
   useEffect(() => {
@@ -42,17 +43,18 @@ export const Landing = () => {
 
 
   return (
-    <Layout title="Landing Page" description="this is description">
+    <Layout title="3xcel Demo Site" description="this is 3xcel landing page, built uisng REACT and MERN">
       <PopUp
-        title={currentData && currentData.name}
+        title={currentData &&  currentData.name}
+        icon={currentData && currentData.icon}
         description=""
         show={show}
         hide={handleClose}
         size="lg"
       >
-        <Page model={currentData} />
+        <InquiryForm model={currentData} />
       </PopUp>
-      <Container >
+      <Container>
         <div
           className="jumbotron-main"
         >
@@ -102,25 +104,42 @@ export const Landing = () => {
         </h4>
 
 
-        <Container>
+        
           <Row>
             {serviceData.map((data, indx) => {
               return (
                 <Col className="p-2" sm={12} lg={4} md={6}>
-                  <a className="customHover" onClick={() => { setCurrentData(data); showPopUp(); }}>
-                    <Card className="p-2 border-0 text-center" bg="">
-                     <h6>
-                      <FontAwesomeIcon  icon={data.icon} /> {data.name}
-                      </h6>
+                  <Card>
+                    <Row className="no-gutters">
+
+
+                      <Card.Body>
+                        <Card.Title>
+                        <FontAwesomeIcon icon={data.icon} /> {data.name}
+                     
+                        </Card.Title>
+                        <p class="card-text">{data.description}</p>
+                        <a className="customHover btn btn-primary" 
+                        onClick={() => { setCurrentData(data); showPopUp(); }}>
+                          Let's get started!</a>
+                      </Card.Body>
+
+                    </Row>
+                  </Card>
+                  {/* <a className="customHover" onClick={() => { setCurrentData(data); showPopUp(); }}>
+                    <Card className="p-2 border-1 text-center" bg="">
+                      <h4>
+                        <FontAwesomeIcon icon={data.icon} /> {data.name}
+                      </h4>
                     </Card>
-                  </a>
+                  </a> */}
 
                 </Col>
               );
             })}
 
           </Row>
-        </Container>
+        
       </Container>
 
 

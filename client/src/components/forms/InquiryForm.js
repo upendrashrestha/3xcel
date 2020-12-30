@@ -3,7 +3,7 @@ import { Col, Row, Button, Container, Form } from 'react-bootstrap';
 import { AngleBracketsRegex } from '../../constants/Constants';
 import emailService from '../../services/email.service';
 
-export const InquiryForm = () => {
+export const InquiryForm = (props) => {
   
   const [msg, setMsg]= useState(null);
   const [inquiry, setInquiry] = useState({});
@@ -22,12 +22,13 @@ export const InquiryForm = () => {
   const handleSubmit = async (event) => {
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
-      event.preventDefault();
       event.stopPropagation();
     }
-    setValidated(true);
+    else{
     sendEmail(inquiry);
     hideForm();
+    }
+    setValidated(true);
     event.preventDefault();
   };
 
@@ -93,6 +94,7 @@ export const InquiryForm = () => {
                 type="text"
                 name="projectType"
                 required
+                value={props.model.name}
                 placeholder="Web/Mobile/Ecommerce/Graphic Design etc..."
                 onChange={handleChange}
               />
