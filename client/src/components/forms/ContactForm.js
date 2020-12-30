@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { Col, Row, Button, Container, Form } from 'react-bootstrap';
 import { AngleBracketsRegex } from '../../constants/Constants';
+import emailService from '../../services/email.service';
 
 export const ContactForm = () => {
+  const [msg, setMsg]= useState(null);
   const [inquiry, setInquiry] = useState({});
   const [validated, setValidated] = useState(false);
 
@@ -23,13 +25,24 @@ export const ContactForm = () => {
       event.stopPropagation();
     }
     setValidated(true);
-
-    console.log(inquiry);
+    sendEmail(inquiry);
+    hideForm();
+    event.preventDefault();
   };
+
+  const hideForm= ()=>{
+    setMsg('Thank you for contacting us.');
+    setInquiry({});
+  }
+
+  const sendEmail = async (model) => {
+    await emailService.sendEmail(model);
+  }
 
   return (
     <Container fluid>
-      <Form onSubmit={handleSubmit} noValidate validated={validated}>
+     {msg &&  <strong>{msg}</strong> ||
+      <Form onSubmit={handleSubmit} method="post" noValidate validated={validated}>
         <Row>
           <Col lg="6" md="6" sm="12">
             <Form.Group>
@@ -37,6 +50,7 @@ export const ContactForm = () => {
               <Form.Control
                 type="text"
                 name="name"
+                value={inquiry.name || ''}
                 required
                 placeholder="Company/Person Name"
                 onChange={handleChange}
@@ -52,6 +66,7 @@ export const ContactForm = () => {
               <Form.Control
                 type="email"
                 name="email"
+                value={inquiry.email || ''}
                 required
                 placeholder="Email"
                 onChange={handleChange}
@@ -67,6 +82,7 @@ export const ContactForm = () => {
               <Form.Control
                 type="tel"
                 name="phone"
+                value={inquiry.phone || ''}
                 placeholder="Phone"
                 onChange={handleChange}
               />
@@ -85,6 +101,7 @@ export const ContactForm = () => {
                 name="message"
                 placeholder="Message"
                 as="textarea"
+                value={inquiry.message || ''}
                 required
                 rows={3}
                 onChange={handleChange}
@@ -102,6 +119,7 @@ export const ContactForm = () => {
           </Col>
         </Row>
       </Form>
+}
     </Container>
   );
 };

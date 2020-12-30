@@ -11,7 +11,7 @@
   },
   "engines": {
     "node": "10.16.0"
-},
+  },
   "keywords": [],
   "author": "Upendra Shrestha",
   "license": "ISC",
@@ -26,6 +26,7 @@
     "is-empty": "^1.2.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.10.11",
+    "nodemailer": "^6.4.17",
     "nodemon": "^2.0.6",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",

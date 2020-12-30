@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import { Col, Row, Button, Container, Form } from 'react-bootstrap';
 import { AngleBracketsRegex } from '../../constants/Constants';
+import emailService from '../../services/email.service';
 
 export const InquiryForm = () => {
+  
+  const [msg, setMsg]= useState(null);
   const [inquiry, setInquiry] = useState({});
   const [validated, setValidated] = useState(false);
 
@@ -23,12 +26,23 @@ export const InquiryForm = () => {
       event.stopPropagation();
     }
     setValidated(true);
-
-    console.log(inquiry);
+    sendEmail(inquiry);
+    hideForm();
+    event.preventDefault();
   };
+
+  const hideForm= ()=>{
+    setMsg('Thank you for contacting us.');
+    setInquiry({});
+  }
+
+  const sendEmail = async (model) => {
+    await emailService.sendEmail(model);
+  }
 
   return (
     <Container fluid>
+      {msg && <strong>{msg}</strong> ||
       <Form onSubmit={handleSubmit} noValidate validated={validated}>
         <Row>
           <Col lg="6" md="6" sm="12">
@@ -97,7 +111,7 @@ export const InquiryForm = () => {
                 type="text"
                 name="projectDetails"
                 required
-                placeholder="Message"
+                placeholder="Project Details"
                 as="textarea"
                 onChange={handleChange}
                 rows={3}
@@ -131,6 +145,7 @@ export const InquiryForm = () => {
           </Col>
         </Row>
       </Form>
+}
     </Container>
   );
 };
