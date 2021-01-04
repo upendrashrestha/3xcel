@@ -1,3 +1,5 @@
+import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react';
 import { Navbar, Nav,  Button } from 'react-bootstrap';
 import './header.css';
@@ -29,8 +31,7 @@ const Header = () => {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ml-auto">
             <Button href="/contact" variant="outline-info" className="rounded-pill">
-              {' '}
-              Contact Us
+              <FontAwesomeIcon icon={faEnvelope}/> Contact Us
             </Button>
           </Nav>
         </Navbar.Collapse>

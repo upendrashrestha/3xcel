@@ -10,9 +10,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import DataService from '../services/datas.service';
 import Layout from '../shared/Layout';
 import PopUp from '../components/popup';
-import Page from '../components/pages';
 import './style.css';
 import { InquiryForm } from '../components/forms/InquiryForm';
+import { faPlayCircle } from '@fortawesome/free-solid-svg-icons';
 
 export const Landing = () => {
   useEffect(() => {
@@ -119,9 +119,9 @@ export const Landing = () => {
                      
                         </Card.Title>
                         <p class="card-text">{data.description}</p>
-                        <a className="customHover btn btn-primary" 
+                        <a className=" btn btn-primary" 
                         onClick={() => { setCurrentData(data); showPopUp(); }}>
-                          Let's get started!</a>
+                          <FontAwesomeIcon icon={faPlayCircle} />  Let's get started </a>
                       </Card.Body>
 
                     </Row>

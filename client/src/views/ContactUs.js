@@ -1,3 +1,5 @@
+import { faEnvelope, faGlobeAmericas, faGlobeAsia, faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { Col, Row, Button, Container, Form } from 'react-bootstrap';
 import { ContactForm } from '../components/forms/ContactForm';
@@ -10,40 +12,43 @@ export const ContactUs = () => {
           <Container className="p-4">
             <Row className="pt-5 pb-2 text-center">
               <Col lg={12} className="text-left">
-                <h2>Locations</h2>
+                <h2><FontAwesomeIcon icon={faMapMarkerAlt} /> Locations</h2>
               </Col>
             </Row>
             <Row>
               <Col sm={12} md={12} lg={12}>
-                <strong>USA</strong>
+                <FontAwesomeIcon icon={faGlobeAmericas} /> <strong>USA</strong>
               </Col>
             </Row>
             <Row>
               <Col sm={12} md={6} lg={6} className="pt-2">
                 1938 Castaway Dr <br />
                 Grand Prairie, TX <br />
-                Email: info@3xcel.com <br />
                 Phone: +1 (214) 901-0690
               </Col>
 
               <Col sm={12} md={6} lg={6} className="pt-2">
                 7330 Gallagher Dr <br />
                 Edina, MN <br />
-                Email: info@3xcel.com <br />
                 Phone: +977 9841723637
               </Col>
             </Row>
             <Row className="pt-4">
               <Col sm={12} md={12} lg={12}>
-                <strong>Nepal</strong>
+                <FontAwesomeIcon icon={faGlobeAsia} /> <strong>Nepal</strong>
               </Col>
             </Row>
             <Row>
               <Col sm={12} md={6} lg={6} className="pt-2">
                 Balaju, 16. <br />
                 Kathmandu Nepal <br />
-                Email: info@3xcel.com <br />
                 Phone: +977 9841723637
+              </Col>
+            </Row>
+            <br/>
+            <Row>
+              <Col sm={12} md={12} lg={12}>
+                Email : <strong>info@3xcel.com</strong>
               </Col>
             </Row>
             <Row className="pt-5">
@@ -59,7 +64,7 @@ export const ContactUs = () => {
               </Col>
             </Row>
             <Row>
-              <ContactForm/>
+              <ContactForm />
             </Row>
           </Container>
         </Row>

@@ -49,7 +49,7 @@ export const ContactForm = () => {
           <Row>
             <Col lg="6" md="6" sm="12">
               <Form.Group>
-                <Form.Label>Name</Form.Label>
+                <Form.Label>Your Name</Form.Label>
                 <Form.Control
                   type="text"
                   name="name"
@@ -65,7 +65,7 @@ export const ContactForm = () => {
             </Col>
             <Col lg="6" md="6" sm="12">
               <Form.Group>
-                <Form.Label>Email</Form.Label>
+                <Form.Label>Your Email</Form.Label>
                 <Form.Control
                   type="email"
                   name="email"
@@ -81,7 +81,7 @@ export const ContactForm = () => {
             </Col>
             <Col lg="6" md="6" sm="12">
               <Form.Group>
-                <Form.Label>Phone</Form.Label>
+                <Form.Label>Your Phone</Form.Label>
                 <Form.Control
                   type="tel"
                   name="phone"

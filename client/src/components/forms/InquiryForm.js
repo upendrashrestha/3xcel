@@ -5,8 +5,9 @@ import emailService from '../../services/email.service';
 
 export const InquiryForm = (props) => {
   
+ 
   const [msg, setMsg]= useState(null);
-  const [inquiry, setInquiry] = useState({});
+  const [inquiry, setInquiry] = useState({'projectType': props.model.name});
   const [validated, setValidated] = useState(false);
 
   const handleChange = (e) => {
@@ -25,6 +26,7 @@ export const InquiryForm = (props) => {
       event.stopPropagation();
     }
     else{
+      
     sendEmail(inquiry);
     hideForm();
     }
@@ -95,6 +97,7 @@ export const InquiryForm = (props) => {
                 name="projectType"
                 required
                 value={props.model.name}
+                disabled
                 placeholder="Web/Mobile/Ecommerce/Graphic Design etc..."
                 onChange={handleChange}
               />
