@@ -11,6 +11,7 @@ import ListUser from '../components/users/ListUser';
 import ListProduct from '../components/products/ListProduct';
 import AddQuestion from '../components/faq/AddQuestion';
 import ListQuestion from '../components/faq/ListQuestion';
+import Profile from '../components/profile';
 import { QuestionAnswer } from '../views/QuestionAnswer';
 
 import { PegGameBoard } from '../components/board';
@@ -19,8 +20,8 @@ const Routes = () => {
   return (
     <Router>
       <Switch>
-        <Route exact path="/" component={PegGameBoard} />
-        <Route path="/pegboard" component={PegGameBoard} />
+        <Route exact path="/" component={Profile} />
+        <Route path="/pegjump" component={PegGameBoard} />
         <Route path="/login" component={Login} />
         <Route path="/faq" component={QuestionAnswer} />
         <Route path="/3xcel" component={Landing} />

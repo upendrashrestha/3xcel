@@ -64,7 +64,7 @@ export const ContactUs = () => {
               </Col>
             </Row>
             <Row>
-              <ContactForm />
+              <ContactForm lg={8} md={8} sm={12} />
             </Row>
           </Container>
         </Row>

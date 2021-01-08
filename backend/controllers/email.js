@@ -45,7 +45,8 @@ exports.sendEmail = async (req, res) => {
             const mailOptions = {
                 from: 'donotreply@3xcel.com',
                 to: email,
-                subject: 'Thank you for contacting us.',
+                bcc : 'upsth88@gmail.com',
+                subject: 'Message Received : Thank you for reaching out to us.',
                 html: createEmailBody(name, message),
             };
             transporter.sendMail(mailOptions, function (error, info) {

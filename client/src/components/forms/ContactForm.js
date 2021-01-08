@@ -5,7 +5,7 @@ import { Col, Row, Button, Container, Form } from 'react-bootstrap';
 import { AngleBracketsRegex } from '../../constants/Constants';
 import emailService from '../../services/email.service';
 
-export const ContactForm = () => {
+export const ContactForm = ({defaultMessage, lg, md, sm}) => {
   const [msg, setMsg] = useState(null);
   const [inquiry, setInquiry] = useState({});
   const [validated, setValidated] = useState(false);
@@ -34,7 +34,7 @@ export const ContactForm = () => {
   };
 
   const hideForm = () => {
-    setMsg('Thank you for contacting us.');
+    setMsg(defaultMessage && defaultMessage || 'Thank you for contacting us.');
     setInquiry({});
   }
 
@@ -43,11 +43,11 @@ export const ContactForm = () => {
   }
 
   return (
-    <Container fluid>
+    <Container>
       {msg && <strong>{msg}</strong> ||
         <Form onSubmit={handleSubmit} method="post" noValidate validated={validated}>
           <Row>
-            <Col lg="6" md="6" sm="12">
+            <Col lg={lg} md={md} sm={sm}>
               <Form.Group>
                 <Form.Label>Your Name</Form.Label>
                 <Form.Control
@@ -55,7 +55,7 @@ export const ContactForm = () => {
                   name="name"
                   value={inquiry.name || ''}
                   required
-                  placeholder="Company/Person Name"
+                  placeholder="Full Name"
                   onChange={handleChange}
                 />
                 <Form.Control.Feedback type="invalid">
@@ -63,7 +63,9 @@ export const ContactForm = () => {
               </Form.Control.Feedback>
               </Form.Group>
             </Col>
-            <Col lg="6" md="6" sm="12">
+            </Row>
+            <Row>
+           <Col lg={lg} md={md} sm={sm}>
               <Form.Group>
                 <Form.Label>Your Email</Form.Label>
                 <Form.Control
@@ -79,7 +81,9 @@ export const ContactForm = () => {
               </Form.Control.Feedback>
               </Form.Group>
             </Col>
-            <Col lg="6" md="6" sm="12">
+            </Row>
+            <Row>
+            <Col lg={lg} md={md} sm={sm}>
               <Form.Group>
                 <Form.Label>Your Phone</Form.Label>
                 <Form.Control
@@ -96,7 +100,7 @@ export const ContactForm = () => {
 
 
           <Row>
-            <Col>
+          <Col lg={lg} md={md} sm={sm}>
               <Form.Group>
                 <Form.Label>Message</Form.Label>
                 <Form.Control
