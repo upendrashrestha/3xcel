@@ -44,7 +44,7 @@ const Profile = () => {
                         <Card>
                             <Card.Body>
                                 <div className="d-flex flex-column align-items-center text-center mb-2">
-                                    <img  src={window.location.origin + "/upendra-shrestha.jpeg"}  alt="Upendra Shrestha" className="rounded-circle" width="120" height="110" />
+                                    <img  src={window.location.origin + "/upendra-shrestha.png"}  alt="Upendra Shrestha" className="rounded-circle" width="120" height="110" />
 
 
                                     <div className="mt-3">
