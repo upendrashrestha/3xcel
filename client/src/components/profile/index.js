@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React,{useState} from 'react';
 import { Container, Row, Col, Card } from 'react-bootstrap';
-import { faEnvelope, faGlobe, faPlay } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelope, faGlobe, faInfoCircle, faPlay } from '@fortawesome/free-solid-svg-icons';
 import { faFacebook, faGithub, faInstagramSquare, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { ContactForm } from '../forms/ContactForm';
 import PopUp from '../popup';
@@ -90,9 +90,10 @@ const Profile = () => {
                     <Col sm={12} md={8} lg={8}>      
                       <Card>
                           <Card.Body>
-                              <h3>Hello World!</h3>
-                              <p>My name is Upendra Shrestha. I am a Software Developer (.Net) with more than 6 years of experience.</p>
-                              <p>I am using this site to try and play around with new technologies.</p>
+                              <h3>Hello!</h3>
+                              <br/>
+                              <p>My name is Upendra Shrestha. I am a Software Developer (.Net) with more than six years of experience.</p>
+                              <p> <FontAwesomeIcon icon={faInfoCircle}/> I am using this site to play around with new technologies.</p>
 <Card className="mb-2"> 
     <Card.Body>
         <h5>Projects (Deployed/Future) </h5>
@@ -103,14 +104,16 @@ const Profile = () => {
     </Card>  
 <Card>
     <Card.Body>
-    <span>Technologies used for this site : </span>
+    <span>Tools and Technologies used for this site : </span>
     
         <span className="mr-1 badge badge-primary">MERN</span>
+        <span className="mr-1 badge badge-primary">React JS</span>
         <span className="mr-1 badge badge-primary">Github</span>
         <span className="mr-1 badge badge-primary">AWS (Amplify)</span>
         <span className="mr-1 badge badge-primary">AWS (S3)</span>
         <span className="mr-1 badge badge-primary">Bootstrap 4</span>
-  
+        <span className="mr-1 badge badge-primary">VS Code</span>
+        
     </Card.Body>
 </Card>                  
                           </Card.Body>
