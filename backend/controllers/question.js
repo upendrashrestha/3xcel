@@ -2,13 +2,9 @@ const Question = require('../models/questions');
 
 exports.getIndex = async (req, res) => {
      await Question.find((data) => data).then((question)=>
-
      {
-         //console.log(question);
-        // res.status(200).render('index', { question: question });
         res.json(question);
     }). catch ((err) =>{
-        console.log(err);
         res.status(401).send({error:err, message:'No FAQ selected.'});
     });
 };
@@ -86,10 +82,10 @@ exports.postEditQuestion = (req, res) => {
 exports.postDelete = async (req, res) => {
     const questionId = req.body.model;
     await Question.findByIdAndRemove(questionId, (data) => data).then((question)=>{
-        console.log('Item Deleted');
+       // console.log('Item Deleted');
         res.status(201).send({message:'FAQ deleted successfully.'});
     }).catch((err) => {
-        console.log(err);
+        //console.log(err);
         res.status(403).send({message:'Error : No FAQ deleted.', error: err});
     });
 };

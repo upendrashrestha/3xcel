@@ -1,7 +1,7 @@
 
-const Model = require('../models/products');
+const Model = require('../models/pages');
 
-const item = 'Product';
+const item = 'Page';
 
 exports.getIndex = async (req, res) => {
     await Model.find((data) => data).then((result) => {
@@ -16,14 +16,12 @@ exports.getModel = async (req, res) => {
     const id = req.params.id;
     const result = await Model.findById(id, (res) => res);
     try {
-       // console.log(result);
+        // console.log(result);
         res.status(200).send({ result: result });
     } catch (error) {
         console.log(error);
     }
 };
-
-
 
 exports.getAddModel = (req, res) => {
     res.status(200).render('edit', { editing: false });
@@ -45,11 +43,34 @@ exports.getEditModel = async (req, res) => {
     });
 };
 
+exports.getModelByCode = async(req, res)=>{
+    
+    const cd = req.params.code;
+    console.log(cd, "CODEE");
+    if (cd==='') {
+        res.status(401).send({ message: `No ${item} Selected.` })
+    }
+
+     Model.findOne({'pageCode' : cd}).then((result)=>{
+        //console.log('RESULL',result)
+        res.status(200).send({result});
+       }).catch(err=>{
+            res.status(404).send({message:'Page Not Found!'});
+        });
+};
+
 exports.postModel = (req, res) => {
     //console.log('server model',req.body.model);
-  
-    const { name, image, description, price } = req.body.model;
-    const model = new Model({ name: name, image: image, description: description, price: price });
+
+    const { title, metaDescription, keywords, content, displayPosition, pageCode } = req.body.model;
+    const model = new Model({
+        title: title,
+        metaDescription: metaDescription,
+        keywords: keywords,
+        content: content,
+        displayPosition: displayPosition,
+        pageCode:pageCode
+    });
     model.save().then(() => {
         res.status(200).send({ message: `${item} added successfully.` });;
     }).catch(err => {
@@ -59,15 +80,17 @@ exports.postModel = (req, res) => {
 };
 
 exports.postEditModel = (req, res) => {
-  //  const id = req.body.id;
-    const {_id, name, image, description, price } = req.body.model;
+    //  const id = req.body.id;
+    const { _id, title, content, metaDescription, keywords, displayPosition, pageCode } = req.body.model;
 
     Model.findById(_id)
         .then((item) => {
-            item.name = name;
-            item.image = image;
-            item.description = description;
-item.price= price;
+            item.title = title;
+            item.content = content;
+            item.metaDescription = metaDescription;
+            item.keywords = keywords;
+            item.displayPosition = displayPosition;
+            item.pageCode = pageCode;
             return item.save();
         })
         .then(() => {
@@ -82,11 +105,11 @@ item.price= price;
 
 exports.postDelete = async (req, res) => {
     const id = req.body.model;
-    await Model.findByIdAndRemove(id, (data) => data).then((product)=>{
-       // console.log('Item Deleted');
-        res.status(201).send({message:`${item} deleted.`});
+    await Model.findByIdAndRemove(id, (data) => data).then((product) => {
+        // console.log('Item Deleted');
+        res.status(201).send({ message: `${item} deleted.` });
     }).catch((err) => {
         //console.log(err);
-        res.status(403).send({message:`No ${item} deleted.`, error: err});
+        res.status(403).send({ message: `No ${item} deleted.`, error: err });
     });
 };

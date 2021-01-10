@@ -2,7 +2,7 @@ import axios from 'axios';
 import authHeader from './auth-header';
 import { baseUrl } from '../configs/config-urls';
 
-const API_URL = baseUrl+'/api/admin/';
+const API_URL = baseUrl+'/api/service/';
 
 const getContent = async () => {
   return await axios.get(API_URL, { headers: authHeader() });

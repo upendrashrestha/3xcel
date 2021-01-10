@@ -1,7 +1,6 @@
 import React from "react";
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 import AuthService from '../../services/auth.service';
-import { Redirect } from 'react-router-dom';
 const DashboardHeader = () => {
 
   return (
@@ -24,6 +23,12 @@ const DashboardHeader = () => {
           <NavDropdown.Item href="/list-users">List Users</NavDropdown.Item>
           <NavDropdown.Item href="/add-user">Add User</NavDropdown.Item>
         </NavDropdown>
+
+        <NavDropdown title="Pages" id="basic-nav-dropdown">
+          <NavDropdown.Item href="/list-pages">List Pages</NavDropdown.Item>
+          <NavDropdown.Item href="/add-page">Add Page</NavDropdown.Item>
+        </NavDropdown>
+
         <Nav.Link href="/faqs">FAQ</Nav.Link>
         <Nav.Link onClick={()=>{AuthService.logout()}} href="/login">Log out</Nav.Link>
       </Navbar>

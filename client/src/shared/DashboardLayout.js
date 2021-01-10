@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 import DashboardHeader from './header/dashboardHeader';
 
 const DashboardLayout = ({ title, description, children, header }) => {

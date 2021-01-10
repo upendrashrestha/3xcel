@@ -1,25 +1,23 @@
 import React, { useEffect, useState } from 'react';
-import { Form, Button, Container, Col,Row } from 'react-bootstrap';
+import { Form, Button, Row, Col} from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import ServicesService from '../../services/services.service';
-import DashboardLayout from '../../shared/DashboardLayout';
 import Editr from '../editor';
 
-const EditService = props => {
+const EditProduct = props => {
 
-  const [service, setService] = useState(props.currentService);
+  const [product, setProduct] = useState(props.currentProduct);
   const [validated, setValidated] = useState(false);
  
   useEffect(
     () => {
-      setService(props.currentService)
+      setProduct(props.currentProduct)
     },
     [ props ]
   )
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setService({ ...service, [name]: value });
+    setProduct({ ...product, [name]: value });
   };
 
  const handleSubmit = async (event) => {
@@ -30,12 +28,12 @@ const EditService = props => {
     }
     setValidated(true);
     props.setEditing(true);
-    await props.updateService(service);
+    await props.updateProduct(product);
   };
 
   return (
    <>
-      {service &&
+      {product &&
         <Row>
           <Col sm={12}>
             <Form noValidate validated={validated} onSubmit={handleSubmit}>
@@ -44,13 +42,13 @@ const EditService = props => {
                 <Form.Control
                   type="text"
                   name="name"
-                  value={service.name}
+                  value={product.name}
                   required
-                  placeholder="Enter Service Title"
+                  placeholder="Enter Title"
                   onChange={handleChange}
                 />
                 <Form.Control.Feedback type="invalid">
-                  Please provide a service Title.
+                  Please provide a product Title.
             </Form.Control.Feedback>
               </Form.Group>
 
@@ -59,7 +57,7 @@ const EditService = props => {
                 <Form.Control
                   type="text"
                   name="image"
-                  value={service.image}
+                  value={product.image}
                   placeholder="Enter Image URL"
                   onChange={handleChange}
                 />
@@ -68,13 +66,27 @@ const EditService = props => {
             </Form.Control.Feedback>
               </Form.Group>
 
+              <Form.Group controlId="formGroupImage">
+                <Form.Label>Price</Form.Label>
+                <Form.Control
+                    type="currency"
+                    name="price"
+                    required
+                    placeholder="Enter Price"
+                    value={product.price}
+                    onChange={handleChange}
+                />
+                <Form.Control.Feedback type="invalid">
+                    Please provide a Price.
+            </Form.Control.Feedback>
+            </Form.Group>
+
               <Form.Group controlId="formGroupDescription">
                 <Form.Label>Description</Form.Label>
-              
-                  <Editr name="description"  onChange={handleChange}  value={service.description}/>
-    
+                <Editr onChange={handleChange} name="description" value={product.description} />
+
                 <Form.Control.Feedback type="invalid">
-                  Please provide a service description.
+                    Please provide a description.
             </Form.Control.Feedback>
               </Form.Group>
               <Button type="submit" className="my-1">
@@ -84,10 +96,10 @@ const EditService = props => {
             </Form>
           </Col>
           </Row>
-           || <p>Please select the service again. <Link to='./list-services'>Go back</Link></p>
+           || <p>Please select the product again. <Link to='./list-products'>Go back</Link></p>
       }
       </>
   );
 };
 
-export default EditService;
+export default EditProduct;

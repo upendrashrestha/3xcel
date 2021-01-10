@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 export const Peg = (props) => {
-    const [node, setNode] = useState(props.node);
+    const [node] = useState(props.node);
 
     return (
         <button

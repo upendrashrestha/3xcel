@@ -1,7 +1,7 @@
 
-const Model = require('../models/products');
+const Model = require('../models/services');
 
-const item = 'Product';
+const item = 'Service';
 
 exports.getIndex = async (req, res) => {
     await Model.find((data) => data).then((result) => {
@@ -12,7 +12,7 @@ exports.getIndex = async (req, res) => {
     });
 };
 
-exports.getModel = async (req, res) => {
+exports.getService = async (req, res) => {
     const id = req.params.id;
     const result = await Model.findById(id, (res) => res);
     try {
@@ -23,13 +23,11 @@ exports.getModel = async (req, res) => {
     }
 };
 
-
-
-exports.getAddModel = (req, res) => {
+exports.getAddService = (req, res) => {
     res.status(200).render('edit', { editing: false });
 };
 
-exports.getEditModel = async (req, res) => {
+exports.getEditService = async (req, res) => {
     const id = req.params.id;
     const editMode = req.query.edit;
     if (!editMode) {
@@ -45,7 +43,7 @@ exports.getEditModel = async (req, res) => {
     });
 };
 
-exports.postModel = (req, res) => {
+exports.postService = (req, res) => {
     //console.log('server model',req.body.model);
   
     const { name, image, description, price } = req.body.model;
@@ -58,7 +56,7 @@ exports.postModel = (req, res) => {
     });
 };
 
-exports.postEditModel = (req, res) => {
+exports.postEditService = (req, res) => {
   //  const id = req.body.id;
     const {_id, name, image, description, price } = req.body.model;
 

@@ -6,14 +6,19 @@ import Login from '../components/users/Login';
 import Register from '../components/users/Register';
 import PrivateRoute from '../private-routes/PrivateRoute';
 import { Dashboard } from '../views/Dashboard';
+
 import ListService from '../components/services/ListService';
 import ListUser from '../components/users/ListUser';
 import ListProduct from '../components/products/ListProduct';
-import AddQuestion from '../components/faq/AddQuestion';
 import ListQuestion from '../components/faq/ListQuestion';
-import Profile from '../components/profile';
-import { QuestionAnswer } from '../views/QuestionAnswer';
+import ListPage from '../components/pages/ListPage';
 
+import Profile from '../components/profile';
+import Page from '../components/pages';
+
+import AddPage from '../components/pages/AddPage';
+
+import { QuestionAnswer } from '../views/QuestionAnswer';
 import { PegGameBoard } from '../components/board';
 
 const Routes = () => {
@@ -25,6 +30,7 @@ const Routes = () => {
         <Route path="/login" component={Login} />
         <Route path="/faq" component={QuestionAnswer} />
         <Route path="/3xcel" component={Landing} />
+        <Route path="/page/:code" component={Page} />
         <Route path="/contact" component={ContactUs} />
 
         <PrivateRoute path="/add-user" component={Register} />
@@ -33,6 +39,9 @@ const Routes = () => {
         <PrivateRoute path="/list-users" component={ListUser} /> 
         <PrivateRoute path="/products" component={ListProduct} />
         <PrivateRoute path="/faqs" component={ListQuestion} />
+        <PrivateRoute path="/list-pages" component={ListPage} />
+
+        <PrivateRoute path="/add-page" component={AddPage} />
 
       </Switch>
     </Router>

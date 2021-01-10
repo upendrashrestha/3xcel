@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { Form, Button, Container, Col } from 'react-bootstrap';
-import ServicesService from '../../services/services.service';
+import { Form, Button} from 'react-bootstrap';
 
 import Editr from '../editor'
 
@@ -52,7 +51,6 @@ const AddService = props => {
         <Form.Control
           type="text"
           name="image"
-          required
           placeholder="Enter Image URL"
           onChange={handleChange}
         />
@@ -63,15 +61,6 @@ const AddService = props => {
 
       <Form.Group controlId="formGroupDescription">
         <Form.Label>Description</Form.Label>
-        {/* <Form.Control
-          type="text"
-          as="textarea"
-          rows={3}
-          name="description"
-          required
-          placeholder="Enter Service Description"
-          onChange={handleChange}
-        /> */}
        
     <Editr name="description"  onChange={handleChange} />
     

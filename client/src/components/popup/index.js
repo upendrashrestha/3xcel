@@ -12,7 +12,7 @@ const PopUp = ({ show, title, icon, description, children, hide, size }) => {
           {` ${title}`}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <p>{description}</p>
+        {description && <p>{description}</p>}
         {children}
       </Modal.Body>
     </Modal>

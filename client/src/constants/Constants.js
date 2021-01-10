@@ -17,4 +17,11 @@ export const QuestionCategories=
     {name:"Behavioral", value:"BEHAVIORAL"},
     {name:"Object Oriented Programming", value:"OOPS"},
     
-]
+];
+
+export const Positions=
+[
+    {name:"None", value:"-1"},
+    {name:"Top Menu", value:"1"},
+    {name:"Bottom Menu", value:"0"}
+];

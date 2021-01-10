@@ -34,25 +34,9 @@ const ListService = () => {
   const [editing, setEditing] = useState(false);
   
   const initialFormState = { _id: null, name: '', description: '', image: '' }
-  const deleteRow = async (e) => {
-    if (window.confirm("Are you sure?"))
-      deleteService(e);
-  }
 
-  const deleteService = async (event) => {
-    setMessage(null);
-    event.preventDefault();
-    await ServicesService.deleteContent(event.target.id)
-      .then((result) => {
-        let successMsg = { status: "success", mode: "delete", text: "Successfully deleted." };
-        setMessage(successMsg);
-        getAPI();
-      })
-      .catch((err) => {
-        let unsuccessMsg = { status: "failure", mode: "delete", text: "Oops! Something went wrong." };
-        setMessage(unsuccessMsg);
-      });
-  }
+
+ 
 
   const addService = async (service) => {
     await ServicesService.addContent(service)
@@ -77,7 +61,7 @@ const ListService = () => {
     console.log("Service", service);
     await ServicesService.editContent(service)
       .then((result) => {
-        console.log(result);
+       // console.log(result);
         let successMsg = { status: "success", mode: "modified", text: "Successfully edited." };
         setMessage(successMsg);
        setShow(true);
@@ -93,16 +77,37 @@ const ListService = () => {
       });
   }
 
+
+ const deleteService = async (event) => {
+    setMessage(null);
+    event.preventDefault();
+    await ServicesService.deleteContent(event.target.id)
+      .then((result) => {
+        let successMsg = { status: "success", mode: "delete", text: "Successfully deleted." };
+        setMessage(successMsg);
+        setShow(true);
+        getAPI();
+      })
+      .catch((err) => {
+        let unsuccessMsg = { status: "failure", mode: "delete", text: "Oops! Something went wrong." };
+        setShow(true);
+        setMessage(unsuccessMsg);
+      });
+  }
   const editRow = async(service) => {
     setEditing(true);
     setShowPopUp(true);
     setCurrentService({ _id: service._id, name: service.name, description: service.description, image: service.image })
   }
 
+  const deleteRow = async (e) => {
+    if (window.confirm("Are you sure?"))
+      deleteService(e);
+  }
+
   const [service, setService] = useState([]);
   const [loading, setLoading] = useState(true);
   const [message, setMessage] = useState(null);
-  const [deleting] = useState(false);
 
   const [currentService, setCurrentService] = useState(initialFormState)
   

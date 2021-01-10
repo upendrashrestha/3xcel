@@ -37,10 +37,13 @@ const Grid = (props) => {
             <td>{i + 1}</td>
             {fields.map(field => {
                 if (field.name === 'image')
-                    return <img width="45px" height="45px" className="rounded-circle p-1 shadow-sm"
-                        src={dr[field.name]} />
+                    return   dr[field.name] && <img 
+                    width="45px" 
+                    height="45px" 
+                    className="rounded-circle p-1 shadow-sm"
+                        src={dr[field.name]} /> || <p></p>;
                 else
-                    return <td>{parse(dr[field.name])}</td>
+                    return <td>{dr[field.name] && parse(dr[field.name])}</td>
             })}
             {enableEdit && <td>
                 <Button

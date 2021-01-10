@@ -24,7 +24,7 @@ const AddQuestion = props => {
       event.stopPropagation();
     }
     setValidated(true);
-    console.log(question);
+   // console.log(question);
     await props.addQuestion(question).then(result => {
       setQuestion(initialFormState);
     });

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
-import { Table, Container, Row, Col } from 'react-bootstrap';
+import {  Container, Row, Col } from 'react-bootstrap';
 import QuestionService from '../../services/questions.service';
 import DashboardLayout from '../../shared/DashboardLayout';
 import AddQuestion from './AddQuestion';
@@ -9,8 +9,6 @@ import Toast from 'react-bootstrap/Toast';
 import Grid from '../grids/grid';
 import PopUp from '../popup';
 
-
-import parse from 'html-react-parser';
 
 const ListQuestion = () => {
   useEffect(() => {

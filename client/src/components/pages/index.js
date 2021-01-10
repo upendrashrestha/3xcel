@@ -1,52 +1,58 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Col, Row, Button, Container, Form, Card } from 'react-bootstrap';
+import pagesService from '../../services/pages.service';
 import Layout from '../../shared/Layout';
-import PopUp from '../popup';
-import { InquiryForm } from '../forms/InquiryForm';
+import parse from 'html-react-parser';
+
 const Page = (props) => {
-  const [data,setData] = useState({});
-  const [show, setShow] = useState(false);
+  const [data, setData] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [notFound, setNotFound] = useState(false);
 
-  useEffect(()=>{
-      let newData;
-    if(props.model)
-    newData =props.model;
-    else{
-        newData ={name:'404! Service not found', description : 'Please select service from home page.'}; 
-    } 
-    const getData = () => {
-        setData(newData);
-      };
-      getData()
-  },[])
+  useEffect(() => {
+    if (props.match.params.code) {
+      setLoading(true);
+      getData(props.match.params.code);
+    }
+    else {
+      setNotFound(true);
+    }
+  }, [])
 
-  const handleClose = () => {
-    setShow(false);
+  const getData = async (code) => {
+    await pagesService.getContentByCode(code)
+      .then((res) => {
+        setLoading(false);
+        if (res.data.result)
+          setData(res.data.result);
+        else {
+          let customData = {
+            title: 'Oops! 404. Page not found',
+            code: '404',
+            metaDescription: 'Oops! 404. Page not found'
+          };
+          setData(customData);
+        }
+      })
+      .catch((error) => {
+        setData({ title: 'Ooops! 404 Page not found!', code: '404', metaDescription: '404! Page not found!' });
+        setLoading(false);
+      });
   };
 
-  const showPopUp = () => {
-    setShow(true);
-  };
+
 
   return (
-    <>
-      <PopUp
-        title="Lets start project"
-        description="Tell us about your big ideas and plans. We’re here to listen, learn, and to help you achieve."
-        show={show}
-        hide={handleClose}
-        size="lg"
-      >
-        <InquiryForm />
-      </PopUp>
-
-            <p className="flow-text grey-text text-darken-1">
-              {data.description}
-            </p>
-            <Button onClick={showPopUp}>LET'S GET STARTED!</Button>
-           
+    <Layout title={data.title} description={data.metaDescription}>
+      <Container>
+       
+          <div style={{minHeight:'200px'}} className="pt-5 pb-2">
+            {data.code === '404' && <h1 className="text-secondary text-center pt-4">{data.title}</h1>}
+            {data.content && parse(data.content)}
+          </div>
         
-    </>
+      </Container>
+    </Layout>
   );
 };
 
