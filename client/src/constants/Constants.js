@@ -7,7 +7,10 @@ export const QuestionCategories=
 [
     {name:"", value:"OTHER"},
     {name:"ASP.NET", value:"ASP.NET"},
-    {name:"Database", value:"DATABASE"},
+    {name:"ASP.NET Web API", value:"ASP.NET Web API"},
+    {name:"ASP.NET MVC", value:"ASP.NET MVC"},
+    {name:"ADO.NET", value:"ADO.NET"},
+    {name:"Database/SQL", value:"DATABASE"},
     {name:"React", value:"REACT"},
     {name:"Javascript", value:"JAVASCRIPT"},
     {name:"C#", value:"C#"},
@@ -16,7 +19,11 @@ export const QuestionCategories=
     {name:"Design Patterns", value:"DESIGN PATTERNS"},
     {name:"Behavioral", value:"BEHAVIORAL"},
     {name:"Object Oriented Programming", value:"OOPS"},
-    
+    {name:"WebServives", value:"WebServices"},
+    {name:"Azure", value:"Azure"},
+    {name:"Azure Dev Ops", value:"Azure Dev Ops"},
+    {name:"Powershell", value:"Powershell"},
+    {name:"GraphQL", value:"GraphQL"}
 ];
 
 export const Positions=

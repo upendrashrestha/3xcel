@@ -15,16 +15,21 @@ const Grid = (props) => {
         enableDelete = false,
         enableIndex = true } = props;
 
-    const [ searchedData, setSearchedData ] = useState(null);
+    const [searchedData, setSearchedData] = useState(null);
 
- 
+
+    const searchIt = (val) => {
+        let searchedList = (props.data.filter(o =>
+            Object.keys(o).some(k => o[k].toString().toLowerCase().includes(val.toString().toLowerCase()))));
+        searchedList.length > 0 ? setSearchedData(searchedList) : setSearchedData(null);
+    }
 
     const doSearch = async (e) => {
         const val = e.target.value;
-        let searchedList = (props.data.filter(o =>
-            Object.keys(o).some(k => o[k].toString().toLowerCase().includes(val.toString().toLowerCase()))));
-            searchedList.length > 0 ? setSearchedData(searchedList) : setSearchedData(null);
-        
+        if ("handleSearch" in props)
+            props.handleSearch(val);
+        else
+            searchIt(val);
     }
 
     const editRow = async (data) => {
@@ -32,36 +37,38 @@ const Grid = (props) => {
         //setDatas(props.data);
     }
 
-    const tableBody = (bodyData) =>    { return bodyData && bodyData.map((dr, i) => {
-        return <tr>
-            <td>{i + 1}</td>
-            {fields.map(field => {
-                if (field.name === 'image')
-                    return   dr[field.name] && <img 
-                    width="45px" 
-                    height="45px" 
-                    className="rounded-circle p-1 shadow-sm"
-                        src={dr[field.name]} /> || <p></p>;
-                else
-                    return <td>{dr[field.name] && parse(dr[field.name])}</td>
-            })}
-            {enableEdit && <td>
-                <Button
-                    onClick={() => {
-                        editRow(dr)
-                    }}
-                    className="p-1 button muted-button"
-                >
-                    Edit
+    const tableBody = (bodyData) => {
+        return bodyData && bodyData.map((dr, i) => {
+            return <tr>
+                <td>{i + 1}</td>
+                {fields.map(field => {
+                    if (field.name === 'image')
+                        return dr[field.name] && <img
+                            width="45px"
+                            height="45px"
+                            className="rounded-circle p-1 shadow-sm"
+                            src={dr[field.name]} /> || <p></p>;
+                    else
+                        return <td>{dr[field.name] && parse(dr[field.name])}</td>
+                })}
+                {enableEdit && <td>
+                    <Button
+                        onClick={() => {
+                            editRow(dr)
+                        }}
+                        className="p-1 button muted-button"
+                    >
+                        Edit
       </Button></td>}
 
-            {enableDelete &&
-                <td> <Button className="mx-1 p-1"
-                    onClick={props.deleteData} id={dr._id}
-                >Delete</Button></td>}
+                {enableDelete &&
+                    <td> <Button className="mx-1 p-1"
+                        onClick={props.deleteData} id={dr._id}
+                    >Delete</Button></td>}
 
-        </tr>
-    }) || 'No records!'}
+            </tr>
+        }) || 'No records!'
+    }
 
 
     return (
@@ -98,12 +105,12 @@ const Grid = (props) => {
                             }
                         </tr>
                     </thead>
-                
+
                 }
 
                 {searchedData && tableBody(searchedData) || tableBody(props.data)}
 
-             
+
             </Table>
 
         </>

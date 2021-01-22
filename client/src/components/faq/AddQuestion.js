@@ -34,23 +34,9 @@ const AddQuestion = props => {
   return (
 
     <Form noValidate validated={validated} onSubmit={handleSubmit}>
-      <Form.Group controlId="formGroupTitle">
-        <Form.Label>Question</Form.Label>
-        <Form.Control
-          type="text"
-          name="question"
-          required
-          placeholder="Enter Question Title"
-          onChange={handleChange}
-        />
-        <Form.Control.Feedback type="invalid">
-          Please provide a question Title.
-            </Form.Control.Feedback>
-      </Form.Group>
-
-      <Form.Group controlId="formGroupTitle">
+       <Form.Group controlId="formGroupCategory">
       <Form.Label>Category</Form.Label>
-        <Form.Control as="select" size="sm" custom name="category"
+        <Form.Control as="select" size="md" custom name="category"
           required
           placeholder="Enter Category"
           onChange={handleChange}>
@@ -62,6 +48,22 @@ const AddQuestion = props => {
           Please provide a Category.
             </Form.Control.Feedback>
       </Form.Group>
+
+      <Form.Group controlId="formGroupTitle">
+        <Form.Label>Question</Form.Label>
+        <Form.Control
+          type="text"
+          name="question"
+          required
+          placeholder="Your Question"
+          onChange={handleChange}
+        />
+        <Form.Control.Feedback type="invalid">
+          Please provide a question Title.
+            </Form.Control.Feedback>
+      </Form.Group>
+
+     
 
       <Form.Group controlId="formGroupDescription">
         <Form.Label>Answer</Form.Label>

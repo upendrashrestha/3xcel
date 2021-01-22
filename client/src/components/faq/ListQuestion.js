@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
-import {  Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 import QuestionService from '../../services/questions.service';
 import DashboardLayout from '../../shared/DashboardLayout';
 import AddQuestion from './AddQuestion';
@@ -18,20 +18,27 @@ const ListQuestion = () => {
   const getAPI = async () => {
     await QuestionService.getContent()
       .then((result) => {
+        setQuestion(result.data);        
+        setCategories(result.data.map(x => x.category).filter(onlyUnique));        
         setLoading(false);
-      console.log(result.data);
-        setQuestion(result.data);
       })
       .catch((error) => {
         console.log(error);
       });
   };
+
+  function onlyUnique(value, index, self) {
+    return self.indexOf(value) === index;
+}
+
+
   const [show, setShow] = useState(false);
-  
+
   const [showPopUp, setShowPopUp] = useState(false);
   const [editing, setEditing] = useState(false);
-  
-  const initialFormState = { _id: null, question: '', answer: '', category:'' }
+  const [categories, setCategories] = useState([]);
+
+  const initialFormState = { _id: null, question: '', answer: '', category: '' }
   const deleteRow = async (e) => {
     if (window.confirm("Are you sure?"))
       deleteQuestion(e);
@@ -60,7 +67,7 @@ const ListQuestion = () => {
         setShow(true);
         setShowPopUp(false);
         getAPI();
-        setCurrentQuestion({ _id: '', question:'', answer:'', category:''});
+        setCurrentQuestion({ _id: '', question: '', answer: '', category: '' });
       })
       .catch((err) => {
         let unsuccessMsg = { status: "failure", mode: "added", text: "Oops! Something went wrong." };
@@ -78,8 +85,8 @@ const ListQuestion = () => {
         console.log(result);
         let successMsg = { status: "success", mode: "modified", text: "Successfully edited." };
         setMessage(successMsg);
-       setShow(true);
-       setShowPopUp(false);
+        setShow(true);
+        setShowPopUp(false);
         getAPI();
         setEditing(false);
       })
@@ -87,37 +94,47 @@ const ListQuestion = () => {
         let unsuccessMsg = { status: "failure", mode: "modified", text: "Oops! Something went wrong." };
         setMessage(unsuccessMsg);
         setEditing(false);
-       setShow(true);
+        setShow(true);
       });
   }
 
-  const editRow = async(question) => {
+  const editRow = async (question) => {
     setEditing(true);
     setShowPopUp(true);
     setCurrentQuestion({ _id: question._id, question: question.question, answer: question.answer, category: question.category })
   }
 
   const [question, setQuestion] = useState([]);
+  const [result, setResult] = useState([]);
   const [loading, setLoading] = useState(true);
   const [message, setMessage] = useState(null);
   const [deleting] = useState(false);
 
   const [currentQuestion, setCurrentQuestion] = useState(initialFormState)
-  
- const gridFields = [
- {title:'Category',name:'category',width:'15'},
- {title:'Question',name:'question', width:'25%'},
- {title:'Answer', name:'answer', width:'40%'}];
 
+  const gridFields = [
+    { title: 'Category', name: 'category', width: '15' },
+    { title: 'Question', name: 'question', width: '25%' },
+    { title: 'Answer', name: 'answer', width: '40%' }];
 
-const handleClose = () => {
-  setShowPopUp(false);
-};
+const handleCategorySelect=(e)=>{
+  setResult(question.filter(q => q.category === e.target.value));
+}
 
-const showModal = () => {
-  setEditing(false);
-  setShowPopUp(true);
-};
+  const handleClose = () => {
+    setShowPopUp(false);
+  };
+
+  const showModal = () => {
+    setEditing(false);
+    setShowPopUp(true);
+  };
+
+  const handleSearch=(val)=>{
+    let searchedList = (question.filter(o =>
+      Object.keys(o).some(k => o[k].toString().toLowerCase().includes(val.toString().toLowerCase()))));     
+     searchedList.length > 0 ? setResult(searchedList) : setResult([]);
+  }
 
   return (
     <DashboardLayout title="Questions" header="Questions">
@@ -142,15 +159,30 @@ const showModal = () => {
         <p>Loading...</p>
       ) : (
           <Container>
-                  
+                <Row className="p-1">
+                  <Col sm={12} md={6}>
                   <Button 
         onClick={() => {
           showModal()
         }}
         className="p-1 button muted-button"
       >
-        Add New Question
+                  Add New Question
 </Button>
+                  </Col>
+                  <Col sm={12} md={6}>
+                  <select  name="category" className="form-control"
+          placeholder="Select Category"
+          onChange={handleCategorySelect}>
+            <option value="">--SELECT--</option>
+          {categories.map(category => {
+            return (<option value={category}>{category}</option>);
+          }
+          )}
+          </select>
+                  </Col>
+                  </Row>  
+                 
              
                 <PopUp
                 title={editing && "Edit Question" || "Add New Question"}
@@ -173,7 +205,7 @@ const showModal = () => {
             <Row className="pt-4">
             <Col sm={12} md={12} lg={12}>
               <Grid 
-              data={question}
+              data={result}
               size="sm" 
               striped={true}
               fields={gridFields}
@@ -182,12 +214,14 @@ const showModal = () => {
               deleteData={deleteRow}
               enableDelete={true}
               enableIndex={true}
-              enableSearch={true}/>
+              enableSearch={true}
+              handleSearch={handleSearch}/>
                </Col>
             </Row>
           </Container>
-        )}
-    </DashboardLayout>
+  )
+}
+    </DashboardLayout >
   );
 };
 
