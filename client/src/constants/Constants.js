@@ -30,5 +30,6 @@ export const Positions=
 [
     {name:"None", value:"-1"},
     {name:"Top Menu", value:"1"},
-    {name:"Bottom Menu", value:"0"}
+    {name:"Bottom Menu", value:"0"},
+    {name:"Profile Menu", value:"2"}
 ];

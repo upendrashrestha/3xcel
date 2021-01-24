@@ -92,7 +92,7 @@ const AddPage = props => {
                             <Form.Label>Display Position</Form.Label>
                             <Form.Control as="select" size="md"  name="displayPosition"
                                 required
-                                placeholder="Display Position"
+                                placeholder="Display"
                                 onChange={handleChange}>
                                 {Positions.map(position => {
                                     return <option value={position.value}>{position.name}</option>

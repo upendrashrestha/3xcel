@@ -15,6 +15,7 @@ import ListPage from '../components/pages/ListPage';
 
 import Profile from '../components/profile';
 import Page from '../components/pages';
+import ProfilePage from '../components/profile/page';
 
 import AddPage from '../components/pages/AddPage';
 
@@ -31,6 +32,7 @@ const Routes = () => {
         <Route path="/faq" component={QuestionAnswer} />
         <Route path="/3xcel" component={Landing} />
         <Route path="/page/:code" component={Page} />
+        <Route path="/:code" component={ProfilePage}/>
         <Route path="/contact" component={ContactUs} />
 
         <PrivateRoute path="/add-user" component={Register} />
