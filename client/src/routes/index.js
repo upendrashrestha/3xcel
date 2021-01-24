@@ -32,7 +32,6 @@ const Routes = () => {
         <Route path="/faq" component={QuestionAnswer} />
         <Route path="/3xcel" component={Landing} />
         <Route path="/page/:code" component={Page} />
-        <Route path="/:code" component={ProfilePage}/>
         <Route path="/contact" component={ContactUs} />
 
         <PrivateRoute path="/add-user" component={Register} />
@@ -44,6 +43,9 @@ const Routes = () => {
         <PrivateRoute path="/list-pages" component={ListPage} />
 
         <PrivateRoute path="/add-page" component={AddPage} />
+
+        {/* Keep this at the end */}
+        <Route path="/:code" component={ProfilePage}/>
 
       </Switch>
     </Router>
