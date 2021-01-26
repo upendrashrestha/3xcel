@@ -68,7 +68,7 @@ const AddQuestion = props => {
       <Form.Group controlId="formGroupDescription">
         <Form.Label>Answer</Form.Label>
       
-        <Editr name="answer" onChange={handleChange} />
+        <Editr name="answer" onChange={handleChange} required />
 
         <Form.Control.Feedback type="invalid">
           Please provide a question description.

@@ -35,15 +35,16 @@ export const QuestionAnswer = () => {
     const [active, setActive] = useState('');
 
     const handleCategory = (e) => {
-        setActive(e.target.name);
-        setResult(question.filter(q => q.category == e.target.name));
-        setCategorisedResult(question.filter(q => q.category == e.target.name));
+        setResult(question.filter(q => q.category == e.target.value));
+        setCategorisedResult(question.filter(q => q.category == e.target.value));
     }
 
     const handleClear = () => {
         setResult(null);
         setCategorisedResult(null);
         setActive('');
+        document.getElementById('searchText').value='';
+        document.getElementById('category').value='';
     }
 
     const doSearch = async (e) => {
@@ -88,16 +89,28 @@ export const QuestionAnswer = () => {
                         <Container className="p-2">
 
                             <Row className="p-2">
-                                <Col lg="4" md="4" sm="8" >
+                                <Col lg={6} md={6} sm={12} className="p-1">
+                                    <select id='category' name="category" className="form-control"
+                                        placeholder="Select Category"
+                                        onChange={handleCategory}>
+                                        <option value="">--SELECT--</option>
+                                        {categories.map(category => {
+                                            return (<option value={category}>{category}</option>);
+                                        }
+                                        )}
+                                    </select>
+                                </Col>
+                                <Col lg="4" md="4" sm="8" className="p-1">
                                     <input
                                         className="form-control"
                                         type="text"
+                                        id='searchText'
                                         name="searchText"
                                         placeholder="Search..."
                                         onChange={doSearch}
                                     />
                                 </Col>
-                                <Col md={{ span: 4, offset: 4 }} sm="4">
+                                <Col md={2} lg={2} sm={4} className="p-1">
                                     <a className="btn btn-link p-2" onClick={handleClear}>
                                         Clear &#10006;</a>
                                 </Col>
@@ -106,7 +119,10 @@ export const QuestionAnswer = () => {
                         </Container>
                         <Container fluid className="p-2">
                             <Row>
-                                <Col lg='3' md='3' sm='3' className="block p-2" >
+
+                            </Row>
+                            <Row>
+                                {/* <Col lg='3' md='3' sm='3' className="block p-2" >
                                     {categories.map(x => {
                                         return <Col>
                                      
@@ -116,7 +132,7 @@ export const QuestionAnswer = () => {
                                     
                                         </Col>
                                     })}
-                                </Col>
+                                </Col> */}
                                 <Col lg='9' md='9' sm='9' className="mt-4">
                                     {displayAccordion(result)}
                                 </Col>
