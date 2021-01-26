@@ -9,7 +9,7 @@ export const Peg = (props) => {
             value={node.value}
             onClick={() => toogleName()}
             className={getStyle()}>
-            {node.displayValue}
+            {/* {node.displayValue} */}
         </button>
     );
 

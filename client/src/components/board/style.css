@@ -53,6 +53,7 @@
     font-size: 45px;
     text-align: center;
     border-radius:50%;
+    background-image: url("./images/knight100x100.png");
   }
   
   .pegbttn:hover{
@@ -64,10 +65,34 @@
   .greyIt{
     color:#4CAF50 !important;
     border-radius:50%;
-    border: 2px solid #4CAF50 !important; 
+    /* border: 2px solid #4CAF50 !important;  */
+    background-image: url("./images/knightless100x100.png");
+  }
+
+  .bttnSelect { 
+    font-weight: 500px;
+  
+    /* border: 6px solid #4CAF50 !important; red */
+    /* border-radius: 50%; */
+    
+    background-image: url("./images/activeKnight100x100.png");
+    border:none;
   }
   
+  .bttnInvalid {
+    background-color: #ffffff;
+    border:none;
+    background-image: url("./images/activeKnight100x100.png");
+  }
   
+  .bttnFocus {
+    background-image: url("./images/focus100x100.png");
+    border-radius: 50%; 
+    border:none;
+
+ }
+ 
+
   /* On screens that are 992px or less, set the background color to blue */
   @media screen and (max-width: 992px) {
     .pegbttn{
@@ -78,7 +103,41 @@
       font-size: 45px;
       text-align: center;
       border-radius:50%;
+      background-image: url("./images/knight100x100.png");
     }
+
+      
+  .greyIt{
+    color:#4CAF50 !important;
+    border-radius:50%;
+    /* border: 2px solid #4CAF50 !important;  */
+    background-image: url("./images/knightless100x100.png");
+  }
+
+  .bttnSelect { 
+    font-weight: 500px;
+  
+    /* border: 6px solid #4CAF50 !important; red */
+    /* border-radius: 50%; */
+    
+    background-image: url("./images/activeKnight100x100.png");
+    border:none;
+  }
+  
+  .bttnInvalid {
+    background-color: #ffffff;
+    border:none;
+    background-image: url("./images/activeKnight100x100.png");
+  }
+  
+  .bttnFocus {
+    background-image: url("./images/focus100x100.png");
+    border-radius: 50%; 
+    border:none;
+
+ }
+ 
+
   }
   
   /* On screens that are 600px or less, set the background color to olive */
@@ -94,36 +153,46 @@
       line-height: 22px;
       text-align:center;
       border-radius:50%;
+      background-image: url("./images/knight60x60.png");
     }
+
+    .bttnSelect { 
+      background-image: url("./images/activeKnight60x60.png");
+      border:none;
+    }
+
+      
+  .greyIt{
+    color:#4CAF50 !important;
+    border-radius:50%;
+    /* border: 2px solid #4CAF50 !important;  */
+    background-image: url("./images/knightless60x60.png");
   }
-  
-  .bttn {
+   .bttnInvalid {
     background-color: #ffffff;
-    border: 2px solid #111; /* blue */
-    border-radius: 50%;
-  }
-  
-  .bttnSelect { 
-    font-weight: 500px;
-    color: #4CAF50 !important;
-    border: 6px solid #4CAF50 !important; /* red */
-    border-radius: 50%;
+    border:none;
+    background-image: url("./images/activeKnight60x60.png");
   }
   
   .bttnFocus {
-    background-color: #4CAF50;
-    color: #4CAF50 !important;
-    border: 2px solid #4CAF50; /* green */
-    border-radius: 50%;
+    border:none;
+    background-image: url("./images/focus60x60.png");
+    border-radius: 50%; 
+
+ }
+ 
   }
   
-  .bttnInvalid {
-    background-color: #ffffff;
-    color: red !important;
-    border: 3px solid red; /* gray */
-    border-radius:50%;
+  .bttn {
+    /* background-color: #ffffff; */
+    /* border: 2px solid #111; blue */
+    /* border-radius: 50%; */
+   border:none;
   }
+
   
+ 
+ 
   @keyframes App-logo-spin {
     from {
       transform: rotate(0deg);
@@ -168,3 +237,6 @@
     text-align: left;
     margin: 0 5%;
   }
+
+  
+  button:focus {outline:0 !important;}

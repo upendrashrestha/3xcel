@@ -27,6 +27,7 @@ const pageRoute = require('./routes/api/page');
 const productRoute = require('./routes/api/product');
 const questionRoute = require('./routes/api/question');
 const mailRoute = require('./routes/api/email');
+const scoreRoute = require('./routes/api/score');
 
 app.use("/api/users", usersRoute);
 app.use('/api/service',serviceRoute);
@@ -34,6 +35,7 @@ app.use('/api/product', productRoute);
 app.use('/api/question', questionRoute);
 app.use('/api/email', mailRoute);
 app.use('/api/page',pageRoute);
+app.use('/api/score', scoreRoute);
 
 app.use(express.urlencoded({ extended: false }));
 app.use('/static', express.static(path.join(`${__dirname}/public`)));

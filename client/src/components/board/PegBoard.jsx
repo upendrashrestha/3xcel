@@ -1,26 +1,78 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Peg } from './Peg';
 import PopUp from '../popup';
-
-
+import './style.css';
+import ScoresService from '../../services/scores.service';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSave } from '@fortawesome/free-solid-svg-icons';
 
 export const PegBoard = (props) => {
     const [datas, setData] = useState(props.data);
     const [pegCount, setPegCount] = useState(15);
     const [count, setCount] = useState(0);
     const [showPopup, setShowPopup] = useState(false);
+    const [timer, setTimer] = useState(0);
+    const countRef = useRef(null);
+    const [score, setScore] = useState(0);
+    const [winner, setWinner] = useState("");
+    const [message, setMessage] = useState("");
+    const [showScoreBoard, setShowScoreBoard] = useState(false);
+
+    const getAPI = async () => {  
+        let sc=0;      
+        if (timer !== 0){
+            sc=timer;
+            setScore(timer);
+        }
+        else{
+            sc=score;
+        }
+        activateTimer(false);
+        await ScoresService.getContent()
+            .then((result) => {
+                let res = result.data.filter(x => x.time > sc);
+                if (res.length > 0 || result.data.length < 5)
+                    setShowScoreBoard(true);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
+
+
+    const activateTimer = (v) => {
+        if (v) {
+            countRef.current = setInterval(() => {
+                setTimer((timer) => timer + 1)
+            }, 1000)
+        } else {
+            clearInterval(countRef.current);
+            setTimer(0);
+        }
+    }
+
+    const showWinnerPopup = () => {  
+        setShowScoreBoard(false);             
+        setShowPopup(true);
+        getAPI();
+    }
+
+    const saveScore = async () => {
+        let model = { name: winner, time: score };
+        await ScoresService.addContent(model)
+            .then((result) => {
+                setShowPopup(false);
+            })
+            .catch((err) => {
+                setMessage("Something went wrong!");
+
+            });
+    }
 
     return (
         <>
             {datas &&
                 <div className="App">
-                    <button onClick={() => resetGame()}>
-                        New Game !
-                        </button>
-
-                    <br />
-                    <span id="pegCount"> Number of pegs left :<strong>{pegCount}</strong></span>
-
                     <div className="triangleBoard">
                         <ul className="board">
                             <li>
@@ -50,54 +102,41 @@ export const PegBoard = (props) => {
                             </li>
                         </ul>
                     </div>
-
                     <div className="footer">
-                        <span className="link" onClick={() => howToPlay()}>How to play?
-                        </span>
-
+                        {timer !== 0 && <mark> {` Timer : ${timer} `} </mark>} <br />
+                        <button onClick={() => resetGame()}> Reset Game </button>
+                        <span id="pegCount"> Number of pegs left :<strong>{pegCount}</strong></span>
                     </div>
-                    <span className="muted-text">Version 1.0 | www.upsth.com | www.urbi.xyz</span>
-
-
                     <PopUp
-                        title="PEG JUMP SOLITAIRE"
-                        description="The goal is to remove all pegs but one by jumping pegs from one side of an occupied peg hole to available space, removing the peg which was jumped over."
+                        title="Congratulations!"
+                        description=""
                         show={showPopup}
                         hide={() => closePopup()}
-                        size="lg">
+                        size="md">
+                        <p className="text-center"><strong>YOU DID IT!</strong></p>
 
-
-
-                        <p className="text-left">
-                            <b>**</b> "T" is a valid peg to move. "O" is available space to move the peg in.
-</p>
-                        <br />
-                        <h4>How to play ?</h4>
-                        <ol>
-                            <li> Start New Game! </li>
-                            <li> Start the game by taking out any peg.</li>
-                            <li> Select the peg that can jump one peg over to the available space.  </li>
-                            <li> Play until you are out of moves.</li>
-                        </ol>
-                        <strong>Enjoy ! </strong><br />
-                        <span className="muted-text">Version 1.1</span>
-
+                        {message && <p style={{ color: 'red' }}>{message}</p>}
+                        <b>Total Time (Seconds) : {score}</b>
+                        {showScoreBoard && <>
+                            <p>Save your score to <b>Score Board</b>.</p>
+                            <input type="text" name="winner" maxLength="7" placeholder="Your Name" onChange={e => setWinner(e.target.value)} />
+                            {" "}
+                            <button value="Save" onClick={saveScore}>
+                                <FontAwesomeIcon icon={faSave} />
+                                {" "}SAVE</button>
+                        </>}
                     </PopUp>
-
                 </div>
 
             }
         </>
     );
 
-    function howToPlay() {
-        setShowPopup(true);
-    }
+
 
     function closePopup() {
         setShowPopup(false);
     }
-
 
     function getNode(id) {
         return datas.nodes.find(x => x.id === id);
@@ -120,12 +159,17 @@ export const PegBoard = (props) => {
         datas.nodes = newData;
         setData(datas);
         setCount(0);
+        activateTimer(false);
         setPegCount(15);
     }
 
     function getPegCount() {
         let numberOfPegs = datas.nodes.filter(x => x.value === 1).length;
         setPegCount(numberOfPegs);
+        if (numberOfPegs === 13) {
+            showWinnerPopup();
+            // showLeaderBoard();
+        }
     }
 
     function deactivateAllNodes() {
@@ -166,8 +210,6 @@ export const PegBoard = (props) => {
         setData(datas);
     }
 
-
-
     function refreshDatas(node) {
         if (node)
             datas.nodes[node.id - 1] = node;
@@ -183,6 +225,7 @@ export const PegBoard = (props) => {
             selectedNode.displayValue = "O";
             selectedNode.flag = "I";
             selectedNode.stylename = "bttn";
+            activateTimer(true);
             refreshDatas(selectedNode);
         } else if (selectedNode.flag === 'S') {
             selectedNode.value = 1;
