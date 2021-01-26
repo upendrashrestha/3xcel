@@ -166,9 +166,8 @@ export const PegBoard = (props) => {
     function getPegCount() {
         let numberOfPegs = datas.nodes.filter(x => x.value === 1).length;
         setPegCount(numberOfPegs);
-        if (numberOfPegs === 13) {
+        if (numberOfPegs === 1) {
             showWinnerPopup();
-            // showLeaderBoard();
         }
     }
 
