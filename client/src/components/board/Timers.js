@@ -13,7 +13,6 @@ export const Timer = (props) => {
             start();
         }else if(stopTimer === false && startTimer===true && props.startTimer === false)
            getTotalTime(); 
-
     });
 
     const start = () => {
