@@ -42,14 +42,10 @@ export const PegBoard = (props) => {
 
     const activateTimer = (v) => {
         if (v) {
-            props.gameStarted(true);
-            countRef.current = setInterval(() => {
-                setTimer((timer) => timer + 1)
-            }, 1000)
+            props.gameStarted(true);           
         } else {
             props.gameStarted(false);
-            clearInterval(countRef.current);
-            setTimer(0);
+           
         }
     }
 

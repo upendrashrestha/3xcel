@@ -9,14 +9,22 @@ export const Timer = (props) => {
     const countRef = useRef(null);
 
     useEffect(() => {
-        if (stopTimer === false && startTimer === null && props.startTimer  === true) { 
+
+        if (stopTimer === false && startTimer === null && props.startTimer === true) {
             start();
-        }else if(stopTimer === false && startTimer===true && props.startTimer === false)
-           getTotalTime(); 
+        } else if (stopTimer === false && startTimer === true && props.startTimer === false) {
+            setStartTimer(null);
+            getTotalTime();
+        }else if (props.startTimer === false){
+            setStartTimer(null);
+            setStopTimer(false);
+        }
+
+
     });
 
     const start = () => {
-        setStartTimer(true); 
+        setStartTimer(true);
         countRef.current = setInterval(() => {
             setTimer((timer) => timer + 1)
         }, 1000);
