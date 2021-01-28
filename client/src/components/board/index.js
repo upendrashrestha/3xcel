@@ -15,7 +15,7 @@ export const PegGameBoard = () => {
                                         data={data} />
                         </Col>
                         <Col sm={12} md={4} lg={4}>
-                                <p className="muted-text">Version 1.2</p>  
+                                <p className="muted-text p-2">Version 1.2</p>  
                              
                                 <ScoreBoard/>
                                 <hr/>

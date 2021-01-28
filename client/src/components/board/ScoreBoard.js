@@ -1,4 +1,4 @@
-import { faCrown, faShieldAlt } from '@fortawesome/free-solid-svg-icons';
+import { faCrown, faShieldAlt, faTrophy } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState, useEffect } from 'react';
 import { Row, Col, Container } from 'react-bootstrap';
@@ -28,18 +28,26 @@ export const ScoreBoard = (props) => {
 
     return (
         <>
-            <strong><FontAwesomeIcon icon={faShieldAlt} /> SCORE BOARD </strong>
-        
+            <strong><FontAwesomeIcon icon={faTrophy} /> SCORE BOARD </strong>
+
 
             {loading && 'Loading...' ||
-                <Container className="p-4">
+                <div className="p-2">
                     {scores.map((x, i) => {
                         return <Row className="text-uppercase text-monospace">
-                            <Col sm={2}>{i === 0 && <FontAwesomeIcon icon={faCrown} />}</Col>
-                            <Col sm={8}>{x.name} </Col>
-                            <Col sm={2}> {x.time} </Col> </Row>
-                    })}
-                </Container>}
+                            <div className="col-1">
+                                {i === 0 && <FontAwesomeIcon icon={faCrown} />}
+                            </div>
+                            <div className="col-7">
+                               <u> {x.name} </u>
+                            </div>
+                            <div className="col-2">
+                                <span className="badge badge-primary">{x.time}</span>
+                            </div>
+                        </Row>
+                    })
+                    }
+                </div>}
 
         </>
     );
