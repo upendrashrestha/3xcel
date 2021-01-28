@@ -50,6 +50,7 @@ export const PegBoard = (props) => {
     }
 
     const showWinnerPopup = () => {  
+        setMessage("");
         props.gameStarted(false);
         setShowScoreBoard(false);             
         setShowPopup(true);
@@ -65,8 +66,7 @@ export const PegBoard = (props) => {
             })
             .catch((err) => {
                 setMessage("Oops! Something went wrong.");
-
-            });
+         });
     }
 
     return (
