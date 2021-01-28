@@ -3,7 +3,7 @@ import { data } from './Data.js';
 import { PegBoard } from './PegBoard';
 import { ScoreBoard } from './ScoreBoard';
 import { Col, Row, Container } from 'react-bootstrap';
-import { Timer } from './Timers.js';
+import { Timer } from './Timer.js/index.js';
 
 export const PegGameBoard = () => {
         const [startTimer, setStartTimer] = useState(false);
