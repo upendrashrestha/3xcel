@@ -42,23 +42,26 @@ export const PegBoard = (props) => {
 
     const activateTimer = (v) => {
         if (v) {
+            props.gameStarted(true);
             countRef.current = setInterval(() => {
                 setTimer((timer) => timer + 1)
             }, 1000)
         } else {
+            props.gameStarted(false);
             clearInterval(countRef.current);
             setTimer(0);
         }
     }
 
     const showWinnerPopup = () => {  
+        props.gameStarted(false);
         setShowScoreBoard(false);             
         setShowPopup(true);
         getAPI();
     }
 
     const saveScore = async () => {
-        let model = { name: winner, time: score };
+        let model = { name: winner, time: props.totalTime };
         await ScoresService.addContent(model)
             .then((result) => {
                 setShowPopup(false);
@@ -72,7 +75,7 @@ export const PegBoard = (props) => {
     return (
         <>
             {datas &&
-                <div className="App">
+                <div className="App">                    
                     <div className="triangleBoard">
                         <ul className="board">
                             <li>
@@ -103,7 +106,7 @@ export const PegBoard = (props) => {
                         </ul>
                     </div>
                     <div className="footer">
-                        {timer !== 0 && <mark> {` Timer : ${timer} `} </mark>} <br />
+                      <br />
                         <button onClick={() => resetGame()}> Reset Game </button>
                         <span id="pegCount"> Number of pegs left :<strong>{pegCount}</strong></span>
                     </div>
@@ -116,7 +119,7 @@ export const PegBoard = (props) => {
                         <p className="text-center"><strong>YOU DID IT!</strong></p>
 
                         {message && <p style={{ color: 'red' }}>{message}</p>}
-                        <b>Total Time (Seconds) : {score}</b>
+                        <b>Total Time (Seconds) : {props.totalTime}</b>
                         {showScoreBoard && <>
                             <p>Save your score to <b>Score Board</b>.</p>
                             <input type="text" name="winner" maxLength="7" placeholder="Your Name" onChange={e => setWinner(e.target.value)} />
