@@ -17,6 +17,8 @@ export const PegGameBoard = () => {
         const getTotalTime = (time) => {
                 setTotalTime(time);
         }
+
+      
         return (<Container>
                 <Row>
 
@@ -26,13 +28,13 @@ export const PegGameBoard = () => {
                                         name="URBI"
                                         data={data}
                                         gameStarted={gameStarted}
-                                        totalTime={totalTime} />
+                                        totalTime={totalTime}/>
                         </Col>
                         <Col sm={12} md={4} lg={4}>
                                 <p className="muted-text p-2">Version 1.2</p>
                                 <Timer startTimer={startTimer} getTotalTime={getTotalTime} />
                                 <div className="border p-2">
-                                <ScoreBoard />
+                                <ScoreBoard/>
                                 </div>
                                 <hr />
                                 <p className="muted-text">

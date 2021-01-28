@@ -65,9 +65,10 @@ export const PegBoard = (props) => {
         await ScoresService.addContent(model)
             .then((result) => {
                 setShowPopup(false);
+                window.location.reload();
             })
             .catch((err) => {
-                setMessage("Something went wrong!");
+                setMessage("Oops! Something went wrong.");
 
             });
     }
