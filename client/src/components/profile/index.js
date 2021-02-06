@@ -134,6 +134,10 @@ const Profile = () => {
                                         <p>
                                             <a href="/pegjump"> Peg Jump Solitaire Game </a> Created using simple HTML, CSS and Javascript.  <a href="/pegjump"> <FontAwesomeIcon icon={faPlay} /> Play</a>
                                         </p>
+                                        <p>
+                                            <a href="http://www.urbi.xyz" target="_blank"> Pickr </a> 
+                                            Randomly picks youtube video's comments and their authors.
+                                        </p>
                                     </Card.Body>
                                 </Card>
                                 <Card>
